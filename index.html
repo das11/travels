@@ -309,6 +309,8 @@ input[type=time],input[type=number]{min-height:48px}
 :root[data-theme="dark"] .peek{color:#7BD9AB}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .peek{color:#7BD9AB}}
 .here{min-height:44px}
+.acts{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+.skipbtn{min-height:44px; padding:0 16px; border-radius:10px; background:var(--surface); border:2px solid var(--line); color:var(--ink); font-weight:600; font-size:15px; cursor:pointer}
 .here.small{min-height:40px}
 
 .strip{list-style:none; margin:14px 0 0 8px; padding:4px 0 4px 18px; border-left:3px dashed var(--line)}
@@ -349,7 +351,14 @@ input[type=time],input[type=number]{min-height:48px}
   .card h3{font-size:24px}
   .eta b{font-size:24px}
   .tabs button{font-size:15px}
-  .dock-b{padding:0 11px; font-size:15px}
+  .dock-b{padding:0 10px; font-size:15px}
+  .dock-in{gap:6px; flex-wrap:wrap}
+  .dock-t{flex-basis:100%}
+  .dock-t b{display:inline; margin-right:8px}
+  .dock-t small{display:inline; margin-right:8px}
+  .dock-b{flex:1; min-height:44px}
+  .dock-b.ok{flex:1.4}
+  body{padding-bottom:calc(150px + env(safe-area-inset-bottom,0px))}
   .rpart{grid-template-columns:1fr}
 }
 </style>
@@ -431,7 +440,7 @@ input[type=time],input[type=number]{min-height:48px}
   <section id="sec-stops">
     <div class="sec-h">
       <h2>The stops</h2>
-      <p>Tap "We're here" at each stop, or in the bar at the bottom, and the car moves along the road. Pumps appear between the stops, and the Fuel stops switch above hides them.</p>
+      <p>Tap "We're here" at each stop, or in the bar at the bottom, and the car moves along the road. Not stopping somewhere? Tap Skip and every time below adjusts. Pumps appear between the stops, and the Fuel stops switch above hides them.</p>
     </div>
     <ol class="stops" id="stops" style="margin-top:14px"></ol>
   </section>
@@ -540,7 +549,7 @@ input[type=time],input[type=number]{min-height:48px}
   </section>
 
   <section class="go">
-    <button class="btn ghost" id="resetBtn" type="button">Reset check-ins and fill-ups</button>
+    <button class="btn ghost" id="resetBtn" type="button">Reset check-ins, skips and fill-ups</button>
   </section>
 </main>
 
@@ -548,6 +557,7 @@ input[type=time],input[type=number]{min-height:48px}
   <div class="dock-in">
     <a class="dock-t" id="dockGo" href="#sec-stops"><small>Next stop</small><b id="dockName"></b><span id="dockSub"></span></a>
     <a class="dock-b" id="dockNav" href="#" target="_blank" rel="noopener">Navigate</a>
+    <button class="dock-b" id="dockSkip" type="button" data-act="skip" data-id="">Skip</button>
     <button class="dock-b ok" id="dockHere" type="button" data-act="done" data-id="">We're here</button>
   </div>
 </div>
@@ -682,7 +692,7 @@ var WISH = [
   "Find the best filter coffee of the trip"
 ];
 
-var state = {dep:"09:00", fast:false, fuel:true, mode:"all", rf:"key", done:{}, fuelled:{}, wish:{}, bingo:{4:true}, taps:0};
+var state = {dep:"09:00", fast:false, fuel:true, mode:"all", rf:"key", skip:{}, done:{}, fuelled:{}, wish:{}, bingo:{4:true}, taps:0};
 var peek = {}, routeUrls = [];
 try{ var saved = JSON.parse(localStorage.getItem(KEY)||"null"); if(saved){ for(var k in saved){ state[k]=saved[k]; } } }catch(e){}
 state.bingo[4] = true;
@@ -693,7 +703,7 @@ function toMin(v){ var p=(v||"09:00").split(":"); return (parseInt(p[0],10)||0)*
 function fmt(m){ m=Math.round(m); var h=Math.floor(m/60)%24, mm=m%60, ap=h>=12?"PM":"AM"; var h12=h%12; if(h12===0)h12=12; return h12+":"+(mm<10?"0":"")+mm+" "+ap; }
 function dur(m){ var h=Math.floor(m/60), mm=m%60; return h? (h+"h "+(mm<10?"0":"")+mm+"m") : (mm+"m"); }
 function mapsUrl(o){ return "https://www.google.com/maps/search/?api=1&query="+o.lat+"%2C"+o.lng+"&query_place_id="+o.pid; }
-function isSkipped(s){ return state.fast && s.optional; }
+function isSkipped(s){ return (state.fast && s.optional) || !!state.skip[s.id]; }
 function pickOpt(s){ return s.opts.filter(matches)[0] || s.opts[0]; }
 function nextStop(){
   for(var i=1;i<STOPS.length;i++){ var s=STOPS[i]; if(!isSkipped(s) && !state.done[s.id]) return s; }
@@ -754,7 +764,7 @@ function renderStops(sch){
     var s = it.s;
     var r = sch.byId[s.id], done = !!state.done[s.id], isNext = !!nxt && nxt.id===s.id;
     if(r && r.skipped){
-      html += '<li class="stop is-skipped"><div class="rail"><span class="km"><b>'+s.km+'</b><small>km</small></span></div><div class="card"><p class="skipnote">Skipped in fast mode: '+s.name+'</p></div></li>';
+      html += '<li class="stop is-skipped"><div class="rail"><span class="km"><b>'+s.km+'</b><small>km</small></span></div><div class="card"><p class="skipnote">Skipped'+(state.skip[s.id]?'':' in fast mode')+': '+s.name+'</p>'+(state.skip[s.id]?'<button type="button" class="peek" data-act="unskip" data-id="'+s.id+'">Add back</button>':'')+'</div></li>';
       return;
     }
     var h = '<li class="stop'+(done?' is-done':'')+(isNext?' is-next':'')+'" id="s-'+s.id+'"><div class="rail"><span class="km"><b>'+s.km+'</b><small>km</small></span></div><article class="card">';
@@ -779,7 +789,7 @@ function renderStops(sch){
     if(s.heads) h += '<p class="heads"><b>Heads up</b>'+s.heads+'</p>';
     if(LEGS[s.id]) h += '<p class="leg">'+LEGS[s.id]+'</p>';
     h = (done && !peek[s.id]) ? head+'<button type="button" class="peek" data-act="peek" data-id="'+s.id+'">Show details</button>' : head+h;
-    if(s.id!=="start") h += '<button class="here" data-act="done" data-id="'+s.id+'" aria-pressed="'+done+'">'+(done?(s.id==="end"?"We made it":"Checked in"):(s.id==="end"?"We're here":"We're here"))+'</button>';
+    if(s.id!=="start") h += '<div class="acts"><button class="here" data-act="done" data-id="'+s.id+'" aria-pressed="'+done+'">'+(done?(s.id==="end"?"We made it":"Checked in"):(s.id==="end"?"We're here":"We're here"))+'</button>'+(s.id!=="end" && !done ? '<button type="button" class="skipbtn" data-act="skip" data-id="'+s.id+'">Skip this stop</button>' : '')+'</div>';
     h += '</article></li>';
     html += h;
   });
@@ -829,6 +839,8 @@ function renderMission(sch){
     $("#dockGo").setAttribute("href", "#s-"+next.id);
     $("#dockNav").setAttribute("href", "https://www.google.com/maps/dir/?api=1&travelmode=driving&destination="+(o ? encodeURIComponent(o.lat+","+o.lng)+"&destination_place_id="+encodeURIComponent(o.pid) : encodeURIComponent(DEST)));
     $("#dockHere").setAttribute("data-id", next.id);
+    $("#dockSkip").setAttribute("data-id", next.id);
+    $("#dockSkip").hidden = next.id==="end";
   }
   var el = $("#nextUp");
   if(!next){ el.innerHTML = '<b>You made it to Puducherry.</b><small>'+END_KM+' km done. Time for the best filter coffee you can find.</small>'; return; }
@@ -1011,7 +1023,7 @@ document.addEventListener("click", function(e){
   if(t.id==="ayt"){ askAYT(); return; }
   if(t.hasAttribute("data-rf")){ state.rf = t.getAttribute("data-rf"); save(); renderAll(); return; }
   if(t.id==="resetBtn"){
-    if(confirm("Clear every check-in and fill-up?")){ state.done = {}; state.fuelled = {}; peek = {}; save(); renderAll(); window.scrollTo(0,0); }
+    if(confirm("Clear every check-in, skip and fill-up?")){ state.done = {}; state.fuelled = {}; state.skip = {}; peek = {}; save(); renderAll(); window.scrollTo(0,0); }
     return;
   }
   if(t.hasAttribute("data-copy")){
@@ -1028,6 +1040,8 @@ document.addEventListener("click", function(e){
   }
   var act = t.getAttribute("data-act");
   if(act==="done"){ var id=t.getAttribute("data-id"); state.done[id] = !state.done[id]; save(); renderAll(); if(id==="end" && state.done[id]) burst(); else if(state.done[id]) scrollNext(); }
+  if(act==="skip"){ var sk=t.getAttribute("data-id"); state.skip[sk] = true; delete state.done[sk]; save(); renderAll(); scrollNext(); }
+  if(act==="unskip"){ delete state.skip[t.getAttribute("data-id")]; save(); renderAll(); }
   if(act==="peek"){ peek[t.getAttribute("data-id")] = true; renderAll(); }
   if(act==="fuelled"){ var fid=t.getAttribute("data-id"); state.fuelled[fid] = !state.fuelled[fid]; save(); renderAll(); }
   if(act==="flip"){ t.classList.toggle("flipped"); }
