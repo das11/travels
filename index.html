@@ -322,7 +322,7 @@ input[type=time],input[type=number]{min-height:48px}
 .strip .n small{color:var(--ink-soft); font-size:14px}
 .strip .hop{font-family:var(--font-hand); font-size:21px; color:var(--ink-soft); line-height:1.1}
 
-.chips{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px}
+.panel .chips,.chips{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px}
 .chips li{font-size:13px; border:1px solid var(--line); border-radius:999px; padding:3px 10px; background:var(--raise)}
 .chips li.fu{border-color:var(--sign); font-weight:600}
 .rparts{display:grid; gap:10px}
@@ -907,7 +907,7 @@ function renderAll(){
   $("#dep").value = state.dep;
   $("#fast").setAttribute("aria-checked", String(state.fast));
   $("#fuelSw").setAttribute("aria-checked", String(state.fuel));
-  document.querySelectorAll(".seg button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-mode")===state.mode)); });
+  document.querySelectorAll(".seg button[data-mode]").forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-mode")===state.mode)); });
 }
 
 function renderPumps(){
