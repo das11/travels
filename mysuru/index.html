@@ -1,0 +1,1291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#4C1D95">
+<meta name="description" content="Mysuru Dash: a same-day Bengaluru to Mysuru and back trip, stop by stop, with timings, Shell and other good fuel pumps, a playlist, games, memories and badges.">
+<title>Mysuru Dash</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234C1D95'/%3E%3Ctext x='16' y='24' font-size='21' text-anchor='middle' fill='%23F5C518' font-family='Arial' font-weight='700'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&family=Caveat:wght@600&display=swap">
+<style>
+[hidden]:not([hidden=until-found i]){display:none!important}
+img{max-width:100%}
+/* Same milestone-stone timeline as the other trip pages, in royal purple and gold for Mysuru. */
+:root{
+  --bg:#F3EFF6; --surface:#FCFAFE; --raise:#F1EBF6; --ink:#1F1530; --ink-soft:#54476A; --line:#D9CFE4;
+  --sign:#5B2A86; --sign-ink:#FAF5FF; --yellow:#F5C518; --yellow-ink:#1C1700;
+  --stone:#F6F0DE; --stone-ink:#1B1226; --asphalt:#1A1226;
+  --veg:#17803F; --nonveg:#B3261E; --warn-bg:#FBEFD2; --warn-ink:#5B3F00;
+  --focus:#5B2A86;
+  --font-display:'Barlow Condensed','Arial Narrow',system-ui,sans-serif;
+  --font-body:'Barlow',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-hand:'Caveat','Segoe Script',cursive;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#130E1C; --surface:#1B1427; --raise:#241A33; --ink:#F1E9F8; --ink-soft:#B7A8C9; --line:#372A4A;
+    --sign:#7C3AED; --asphalt:#0C0813; --veg:#4CC083; --nonveg:#F0776F; --warn-bg:#3A2F10; --warn-ink:#F2D58A;
+    --focus:#F5C518; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#130E1C; --surface:#1B1427; --raise:#241A33; --ink:#F1E9F8; --ink-soft:#B7A8C9; --line:#372A4A;
+  --sign:#7C3AED; --asphalt:#0C0813; --veg:#4CC083; --nonveg:#F0776F; --warn-bg:#3A2F10; --warn-ink:#F2D58A;
+  --focus:#F5C518; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--ink); font-family:var(--font-body); font-size:16px; line-height:1.5;
+  padding-block:20px 56px;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap{max-width:720px; margin-inline:auto; display:grid; gap:28px}
+h1,h2,h3{font-family:var(--font-display); margin:0; text-wrap:balance; line-height:1.05}
+p{margin:0}
+a{color:var(--sign); text-underline-offset:3px}
+:root[data-theme="dark"] a{color:#C4B5FD}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) a{color:#C4B5FD}}
+button,input{font:inherit; color:inherit}
+:focus-visible{outline:3px solid var(--focus); outline-offset:2px}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+
+/* Hero */
+.hero{display:grid; grid-template-columns:96px minmax(0,1fr); gap:18px; align-items:end}
+.stone{
+  width:96px; background:var(--stone); color:var(--stone-ink); border:2px solid var(--stone-ink);
+  border-radius:48px 48px 6px 6px; overflow:hidden; text-align:center; font-family:var(--font-display);
+  box-shadow:0 3px 0 var(--asphalt);
+}
+.stone-top{background:var(--yellow); color:var(--yellow-ink); padding:14px 4px 6px; font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; line-height:1.1}
+.stone-body{padding:6px 4px 10px}
+.stone-body b{display:block; font-size:44px; line-height:1; font-weight:800}
+.stone-body span{font-size:13px; font-weight:700; letter-spacing:.1em; text-transform:uppercase}
+.eyebrow{font-family:var(--font-display); font-weight:600; letter-spacing:.1em; text-transform:uppercase; font-size:14px; color:var(--ink-soft)}
+h1{font-size:clamp(46px,13vw,68px); font-weight:800; letter-spacing:-.01em; margin-block:2px 6px}
+.lede{color:var(--ink-soft); max-width:46ch}
+
+/* Controls */
+.controls{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px}
+.ctl{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:12px 14px; display:grid; gap:8px; align-content:start}
+.ctl>label,.ctl>span.lab{font-family:var(--font-display); font-weight:700; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft)}
+.ctl small{color:var(--ink-soft); font-size:13px; line-height:1.3}
+input[type=time],input[type=number]{
+  background:var(--raise); border:1px solid var(--line); border-radius:10px; padding:8px 10px; font-size:20px;
+  font-family:var(--font-display); font-weight:700; width:100%; color-scheme:inherit;
+}
+.switch{display:flex; align-items:center; gap:10px; background:none; border:0; padding:0; cursor:pointer; text-align:left}
+.switch .track{width:44px; height:26px; border-radius:13px; background:var(--line); position:relative; flex:none; transition:background .15s}
+.switch .track::after{content:""; position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%; background:var(--surface); box-shadow:0 1px 2px rgba(0,0,0,.35); transition:transform .15s}
+.switch[aria-checked="true"] .track{background:var(--sign)}
+.switch[aria-checked="true"] .track::after{transform:translateX(18px)}
+.switch b{font-weight:600}
+.seg{display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--line); border-radius:10px; overflow:hidden}
+.seg button{background:var(--raise); border:0; padding:9px 4px; cursor:pointer; font-weight:600; font-size:14px}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--sign); color:var(--sign-ink)}
+
+/* Boarding-pass summary */
+.pass{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); position:relative}
+.pass>div{padding:12px 16px; display:grid; gap:2px}
+.pass>div+div{border-left:1px dashed var(--line)}
+.pass span{font-family:var(--font-display); font-weight:700; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft)}
+.pass b{font-family:var(--font-display); font-weight:800; font-size:28px; line-height:1.05; font-variant-numeric:tabular-nums}
+@media (max-width:420px){.pass>div:nth-child(3){border-left:0}.pass>div:nth-child(n+3){border-top:1px dashed var(--line)}}
+.sun{font-size:15px; color:var(--ink-soft)}
+.sun b{color:var(--ink)}
+
+/* Mission control */
+.mission{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px 16px; display:grid; gap:14px}
+.mission h2{font-size:22px; font-weight:700}
+.roadbox{padding:12px 14px 4px}
+.road{height:14px; border-radius:7px; background:var(--asphalt); position:relative}
+.road::after{content:""; position:absolute; left:6px; right:6px; top:6px; height:2px; background:repeating-linear-gradient(90deg,#d9dccf 0 8px,transparent 8px 16px); opacity:.55}
+.road-fill{position:absolute; inset:0 auto 0 0; background:var(--sign); border-radius:7px; width:0; transition:width .4s}
+.road-fill::after{content:""; position:absolute; left:6px; right:6px; top:6px; height:2px; background:repeating-linear-gradient(90deg,var(--yellow) 0 8px,transparent 8px 16px)}
+.dot{position:absolute; top:50%; width:12px; height:12px; margin:-6px 0 0 -6px; border-radius:50%; background:var(--surface); border:2px solid var(--yellow); z-index:1}
+.dot.on{background:var(--yellow)}
+.car{position:absolute; top:-12px; width:30px; height:18px; margin-left:-15px; z-index:2; transition:left .4s}
+.next{font-size:16px}
+.next b{font-family:var(--font-display); font-size:20px}
+.next small{display:block; color:var(--ink-soft); font-size:14px}
+
+/* Timeline */
+.sec-h{display:grid; gap:4px}
+.sec-h h2{font-size:32px; font-weight:800}
+.sec-h p{color:var(--ink-soft)}
+.stops{list-style:none; margin:0; padding:0; display:grid; gap:14px}
+.stop{display:grid; grid-template-columns:54px minmax(0,1fr); gap:12px}
+.rail{position:relative; display:flex; justify-content:center; align-items:flex-start}
+.rail::before{content:""; position:absolute; top:0; bottom:-14px; left:50%; margin-left:-1.5px; border-left:3px dashed var(--line)}
+.stop:last-child .rail::before{bottom:0}
+.stop.is-done .rail::before{border-color:var(--yellow)}
+.km{
+  position:relative; z-index:1; width:50px; text-align:center; background:var(--stone); color:var(--stone-ink);
+  border:2px solid var(--stone-ink); border-top:9px solid var(--yellow); border-radius:9px 9px 3px 3px; padding:3px 0 4px;
+  font-family:var(--font-display); line-height:1;
+}
+.km b{display:block; font-size:21px; font-weight:800; font-variant-numeric:tabular-nums}
+.km small{font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px 16px; display:grid; gap:10px; min-width:0}
+.stop.is-done .card{background:var(--raise)}
+.top{display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap}
+.kind{font-family:var(--font-display); font-weight:700; font-size:13px; letter-spacing:.1em; text-transform:uppercase; background:var(--sign); color:var(--sign-ink); padding:3px 9px; border-radius:6px}
+.kind.k-start,.kind.k-end{background:var(--yellow); color:var(--yellow-ink)}
+.kind.k-brunch,.kind.k-lunch{background:var(--asphalt); color:#F6F3E4}
+.eta{display:flex; align-items:baseline; gap:8px}
+.eta b{font-family:var(--font-display); font-size:26px; font-weight:800; font-variant-numeric:tabular-nums}
+.eta small{color:var(--ink-soft); font-size:14px}
+.card h3{font-size:27px; font-weight:800}
+.where{color:var(--ink-soft); font-size:15px; margin-top:-6px}
+.pitch{font-size:16px}
+.opts{list-style:none; margin:0; padding:0; display:grid; gap:8px}
+.opt{background:var(--raise); border:1px solid var(--line); border-radius:10px; padding:10px 12px; display:grid; gap:2px}
+.opt-h{display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap}
+.opt-h b{font-size:17px; font-weight:600}
+.opt p{font-size:15px; color:var(--ink-soft)}
+.opt a{font-size:14px; font-weight:600}
+.diet{display:inline-flex; align-items:center; gap:5px; font-family:var(--font-display); font-weight:700; font-size:13px; letter-spacing:.06em; text-transform:uppercase}
+.diet i{width:13px; height:13px; border:2px solid currentColor; border-radius:2px; display:inline-grid; place-items:center}
+.diet i::after{content:""; width:5px; height:5px; border-radius:50%; background:currentColor}
+.diet.veg{color:var(--veg)} .diet.nv{color:var(--nonveg)}
+.diet.both i:first-child{color:var(--veg)} .diet.both i:nth-child(2){color:var(--nonveg)}
+.diet.both{color:var(--ink-soft)}
+.facts{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px}
+.facts li{font-size:13px; font-weight:500; border:1px solid var(--line); border-radius:999px; padding:2px 10px; color:var(--ink-soft)}
+.heads{background:var(--warn-bg); color:var(--warn-ink); border-radius:10px; padding:9px 12px; font-size:14px}
+.heads b{font-family:var(--font-display); letter-spacing:.08em; text-transform:uppercase; font-size:13px; margin-right:6px}
+.empty{font-size:14px; color:var(--ink-soft); font-style:italic}
+.here{
+  justify-self:start; cursor:pointer; background:var(--yellow); color:var(--yellow-ink); border:2px solid var(--yellow-ink);
+  border-radius:10px; padding:8px 16px; font-weight:600; font-size:15px; box-shadow:0 2px 0 var(--yellow-ink);
+}
+.here:active{transform:translateY(2px); box-shadow:none}
+.here[aria-pressed="true"]{background:var(--sign); color:var(--sign-ink); border-color:var(--sign); box-shadow:none}
+.stop.is-skipped .card{padding:10px 14px; opacity:.7; background:transparent; border-style:dashed}
+.stop.is-skipped .km{opacity:.5}
+.skipnote{font-size:14px; color:var(--ink-soft)}
+
+/* Road notes, fuel */
+.panel{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; display:grid; gap:10px}
+.panel h3{font-size:24px; font-weight:800}
+.panel p,.panel li{font-size:15px}
+.panel ul{margin:0; padding-left:18px; display:grid; gap:4px}
+.calc{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.calc label{display:grid; gap:4px; font-family:var(--font-display); font-weight:700; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft)}
+.calc-out{grid-column:1/-1; font-size:15px}
+.pumps{list-style:none; margin:0; padding:0; display:grid; gap:8px}
+.pump{display:grid; grid-template-columns:52px minmax(0,1fr); gap:12px; align-items:start; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:10px 12px}
+.pump .km{width:46px; border-top-width:7px}
+.pump .km b{font-size:19px}
+.pump h4{margin:0; font-size:16px; font-weight:600; line-height:1.25}
+.pump .meta{display:flex; flex-wrap:wrap; gap:4px 12px; font-size:13px; color:var(--ink-soft); margin-top:2px}
+.pump .meta b{color:var(--ink)}
+.pump p{font-size:14px; color:var(--ink-soft); margin-top:3px}
+.pump.anchor{border-color:var(--sign); border-width:2px}
+.tag{font-family:var(--font-display); font-weight:700; font-size:12px; letter-spacing:.08em; text-transform:uppercase; background:var(--sign); color:var(--sign-ink); border-radius:4px; padding:1px 6px; margin-left:6px; vertical-align:2px}
+.sos{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px}
+.sos div{background:var(--warn-bg); color:var(--warn-ink); border-radius:12px; padding:10px 14px}
+.sos b{display:block; font-family:var(--font-display); font-size:32px; font-weight:800; line-height:1}
+.sos span{font-size:14px}
+
+details{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:0}
+summary{cursor:pointer; padding:12px 16px; font-family:var(--font-display); font-weight:700; font-size:20px; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+"; font-size:24px; line-height:1; color:var(--ink-soft)}
+details[open] summary::after{content:"\2212"}
+details .body{padding:0 16px 14px; display:grid; gap:8px}
+.bk{display:grid; gap:2px; padding-top:8px; border-top:1px dashed var(--line)}
+.bk:first-child{border-top:0; padding-top:0}
+.bk-h{display:flex; justify-content:space-between; gap:10px; align-items:center; flex-wrap:wrap}
+.bk-h b{font-weight:600}
+.bk p{font-size:14px; color:var(--ink-soft)}
+.bk a{font-size:14px; font-weight:600}
+.skip{color:var(--nonveg)}
+
+.diagram{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px; overflow-x:auto}
+.diagram pre{margin:0 auto; width:max-content; max-width:100%}
+
+/* Games */
+.games{display:grid; gap:14px}
+.bingo{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px}
+.bingo button{
+  aspect-ratio:1; background:var(--surface); border:2px solid var(--line); border-radius:12px; cursor:pointer; padding:6px;
+  font-family:var(--font-display); font-weight:700; font-size:clamp(15px,4.6vw,20px); line-height:1.1; text-wrap:balance; display:grid; place-items:center; text-align:center;
+}
+.bingo button[aria-pressed="true"]{background:var(--yellow); color:var(--yellow-ink); border-color:var(--yellow-ink)}
+.bingo button.free{border-style:dashed}
+.bingo-msg{min-height:1.5em; font-weight:600; color:var(--sign)}
+:root[data-theme="dark"] .bingo-msg{color:#C4B5FD}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bingo-msg{color:#C4B5FD}}
+.ayt{display:grid; gap:10px; justify-items:start}
+.ayt button{background:var(--asphalt); color:#F6F3E4; border:0; border-radius:12px; padding:12px 20px; font-family:var(--font-display); font-weight:800; font-size:22px; cursor:pointer; box-shadow:0 3px 0 #000}
+.ayt button:active{transform:translateY(3px); box-shadow:none}
+.ayt .reply{font-family:var(--font-hand); font-size:28px; line-height:1.15; min-height:1.2em; color:var(--ink)}
+.ayt small{color:var(--ink-soft)}
+
+/* Footer actions */
+.go{display:grid; gap:10px}
+.btn{display:inline-flex; justify-content:center; align-items:center; gap:8px; text-decoration:none; border-radius:12px; padding:13px 18px; font-weight:600; font-size:17px; border:2px solid var(--yellow-ink); cursor:pointer}
+.btn.primary{background:var(--yellow); color:var(--yellow-ink); box-shadow:0 3px 0 var(--yellow-ink)}
+.btn.ghost{background:var(--surface); color:var(--ink); border-color:var(--line)}
+.fine{font-size:13px; color:var(--ink-soft)}
+.fine a{font-weight:500}
+.linkbox{width:100%; font-size:12px; padding:8px 10px; border-radius:8px; border:1px solid var(--line); background:var(--raise); color:var(--ink-soft)}
+/* Fuel stops inside the timeline */
+.stop.is-fuel .km{width:44px; border-top-color:var(--sign)}
+.stop.is-fuel .km b{font-size:18px}
+.stop.is-fuel .card{padding:10px 14px 12px; gap:6px; background:var(--raise)}
+.stop.is-fuel.is-done .card{border-color:var(--sign)}
+.kind.k-fuel{background:var(--sign)}
+.fuelcard h3{font-size:20px}
+.fuelcard .eta b{font-size:20px}
+.fuelcard .note{font-size:14px; color:var(--ink-soft)}
+.fuelrow{display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center}
+.fuelrow a{font-size:14px; font-weight:600}
+.fuelrow .meta{font-size:13px; color:var(--ink-soft)}
+.here.small{padding:5px 12px; font-size:14px}
+.dot.fuel{width:8px; height:8px; margin:-4px 0 0 -4px; border-radius:2px; border-color:var(--sign); background:var(--sign); z-index:0}
+.dot.fuel.on{background:var(--yellow)}
+.leg{font-family:var(--font-hand); font-size:22px; line-height:1.15; color:var(--ink-soft)}
+
+/* Passenger seat tabs */
+.tabs{display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--line); border-radius:12px; overflow:hidden}
+.tabs button{background:var(--raise); border:0; padding:10px 2px; cursor:pointer; font-family:var(--font-display); font-weight:700; font-size:17px}
+.tabs button+button{border-left:1px solid var(--line)}
+.tabs button[aria-selected="true"]{background:var(--sign); color:var(--sign-ink)}
+.tabpane{display:grid; gap:12px}
+.board{background:var(--sign); color:var(--sign-ink); border:4px solid var(--stone); outline:2px solid var(--sign); border-radius:12px; padding:22px 18px; min-height:150px; display:grid; align-content:center; justify-items:center; text-align:center; gap:8px}
+.board small{font-family:var(--font-display); font-weight:700; letter-spacing:.14em; text-transform:uppercase; font-size:13px; opacity:.85}
+.board p{font-family:var(--font-display); font-weight:700; font-size:clamp(24px,6.5vw,32px); line-height:1.1; text-wrap:balance}
+.draw{justify-self:start; background:var(--yellow); color:var(--yellow-ink); border:2px solid var(--yellow-ink); border-radius:10px; padding:9px 18px; font-weight:600; cursor:pointer; box-shadow:0 2px 0 var(--yellow-ink)}
+.draw:active{transform:translateY(2px); box-shadow:none}
+.phs{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:8px}
+.ph{background:var(--surface); border:2px solid var(--line); border-radius:12px; padding:12px 14px; text-align:left; cursor:pointer; display:grid; gap:2px; min-height:84px; align-content:center}
+.ph .lang{font-family:var(--font-display); font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft)}
+.ph .say{font-family:var(--font-display); font-weight:800; font-size:24px; line-height:1.1}
+.ph .mean{display:none; font-size:14px}
+.ph.flipped{background:var(--yellow); color:var(--yellow-ink); border-color:var(--yellow-ink)}
+.ph.flipped .mean{display:block}
+.ph.flipped .lang{color:var(--yellow-ink)}
+.wish{list-style:none; margin:0; padding:0; display:grid; gap:8px}
+.wish button{width:100%; text-align:left; background:var(--surface); border:2px solid var(--line); border-radius:12px; padding:11px 14px; cursor:pointer; display:flex; gap:12px; align-items:center; font-weight:500}
+.wish .box{width:22px; height:22px; border:2px solid currentColor; border-radius:6px; flex:none; display:grid; place-items:center; font-size:14px; line-height:1}
+.wish button[aria-pressed="true"]{background:var(--raise); border-color:var(--sign)}
+.wish button[aria-pressed="true"] .box{background:var(--sign); border-color:var(--sign); color:var(--sign-ink)}
+.wish button[aria-pressed="true"] .box::after{content:"\2713"}
+.wish button[aria-pressed="true"] .t{text-decoration:line-through; color:var(--ink-soft)}
+.confetti{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:50}
+.confetti i{position:absolute; top:-16px; width:9px; height:15px; animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(112vh) rotate(600deg)}}
+@media (prefers-reduced-motion: reduce){*{transition:none!important} .confetti{display:none}}
+
+/* Mobile and usability pass */
+html{-webkit-text-size-adjust:100%; scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px); scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0; padding-top:20px; padding-bottom:calc(120px + env(safe-area-inset-bottom,0px)); -webkit-tap-highlight-color:transparent}
+button,a,input{touch-action:manipulation}
+.panel>.lab{font-family:var(--font-display); font-weight:700; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft)}
+
+.jump{position:sticky; top:0; z-index:30; display:flex; gap:8px; overflow-x:auto; margin-inline:-16px; padding:calc(8px + env(safe-area-inset-top,0px)) 16px 8px; background:var(--bg); background:color-mix(in srgb,var(--bg) 92%,transparent); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); scrollbar-width:none}
+.jump::-webkit-scrollbar{display:none}
+.jump a{flex:none; display:inline-flex; align-items:center; min-height:40px; padding:0 14px; border-radius:999px; background:var(--surface); border:1px solid var(--line); text-decoration:none; color:var(--ink)!important; font-family:var(--font-display); font-weight:700; font-size:16px; letter-spacing:.05em; text-transform:uppercase}
+.jump a:active{background:var(--yellow); color:var(--yellow-ink)!important}
+
+.controls{grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
+.ctl{padding:10px 12px}
+.ctl-crav,.ctl-fuel{grid-column:1/-1}
+.switch{min-height:44px}
+.seg button{min-height:44px}
+input[type=time],input[type=number]{min-height:48px}
+@media (min-width:720px){.controls{grid-template-columns:repeat(4,minmax(0,1fr))} .ctl-crav,.ctl-fuel{grid-column:auto}}
+
+.stop.is-next .card{border-color:var(--sign); box-shadow:0 0 0 3px rgba(91,42,134,.28)}
+.peek{justify-self:start; background:none; border:0; padding:6px 0; min-height:36px; color:var(--sign); font-weight:600; text-decoration:underline; text-underline-offset:3px; cursor:pointer}
+:root[data-theme="dark"] .peek{color:#C4B5FD}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .peek{color:#C4B5FD}}
+.here{min-height:44px}
+.acts{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+.skipbtn{min-height:44px; padding:0 16px; border-radius:10px; background:var(--surface); border:2px solid var(--line); color:var(--ink); font-weight:600; font-size:15px; cursor:pointer}
+.here.small{min-height:40px}
+
+.strip{list-style:none; margin:14px 0 0 8px; padding:4px 0 4px 18px; border-left:3px dashed var(--line)}
+.strip li{position:relative}
+.strip .n{display:flex; justify-content:space-between; align-items:baseline; gap:4px 10px; flex-wrap:wrap; padding:8px 0}
+.strip .n::before{content:""; position:absolute; left:-27px; top:13px; width:13px; height:13px; border-radius:50%; background:var(--sign); border:2px solid var(--bg)}
+.strip .n.f::before{background:var(--yellow)}
+.strip .n b{font-family:var(--font-display); font-size:20px; font-weight:800}
+.strip .n small{color:var(--ink-soft); font-size:14px}
+.strip .hop{font-family:var(--font-hand); font-size:21px; color:var(--ink-soft); line-height:1.1}
+
+.panel .chips,.chips{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px}
+.chips li{font-size:13px; border:1px solid var(--line); border-radius:999px; padding:3px 10px; background:var(--raise)}
+.chips li.fu{border-color:var(--sign); font-weight:600}
+.rparts{display:grid; gap:10px}
+.rpart{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px}
+.rpart .btn{min-height:48px; text-align:center}
+.btn.primary{color:var(--yellow-ink)!important}
+
+.dock{position:fixed; left:0; right:0; bottom:0; z-index:40; background:var(--asphalt); color:#F6F3E4; border-top:3px solid var(--yellow); padding:10px max(12px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left))}
+.dock-in{max-width:720px; margin:0 auto; display:flex; align-items:center; gap:10px}
+.dock-t{flex:1; min-width:0; text-decoration:none; color:#F6F3E4!important}
+.dock-t small{display:block; font-family:var(--font-display); font-weight:700; letter-spacing:.1em; text-transform:uppercase; font-size:12px; color:var(--yellow)}
+.dock-t b{display:block; font-family:var(--font-display); font-size:20px; font-weight:800; line-height:1.1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.dock-t span{display:block; font-size:13px; opacity:.85; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.dock-b{flex:none; display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:0 14px; border-radius:12px; border:2px solid var(--yellow); background:transparent; color:var(--yellow)!important; font-weight:600; font-size:16px; text-decoration:none; cursor:pointer}
+.dock-b.ok{background:var(--yellow); color:var(--yellow-ink)!important}
+
+@media (max-width:420px){
+  .hero{grid-template-columns:84px minmax(0,1fr); gap:14px}
+  .stone{width:84px}
+  .stone-top{font-size:11px; letter-spacing:.03em; padding-inline:2px}
+  .stone-body b{font-size:38px}
+  .stop{grid-template-columns:44px minmax(0,1fr); gap:8px}
+  .km{width:42px} .km b{font-size:18px}
+  .stop.is-fuel .km{width:40px}
+  .card{padding:12px 12px 14px}
+  .card h3{font-size:24px}
+  .eta b{font-size:24px}
+  .tabs button{font-size:15px}
+  .dock-b{padding:0 10px; font-size:15px}
+  .dock-in{gap:6px; flex-wrap:wrap}
+  .dock-t{flex-basis:100%}
+  .dock-t b{display:inline; margin-right:8px}
+  .dock-t small{display:inline; margin-right:8px}
+  .dock-b{flex:1; min-height:44px}
+  .dock-b.ok{flex:1.4}
+  body{padding-bottom:calc(150px + env(safe-area-inset-bottom,0px))}
+  .rpart{grid-template-columns:1fr}
+}
+
+/* Mysuru additions */
+.kind.k-sight{background:#5B3F00; color:#FBEFD2}
+.hero{background:linear-gradient(135deg,#6D28D9 0%,#4C1D95 55%,#2E1065 100%); color:#FFF7ED; border-radius:20px; padding:18px; position:relative; overflow:hidden}
+.hero::after{content:""; position:absolute; right:-34px; top:-34px; width:140px; height:140px; border-radius:50%; background:radial-gradient(circle,#FDE68A 0%,#FBBF24 42%,rgba(251,191,36,0) 70%); pointer-events:none}
+.hero>*{position:relative; z-index:1}
+.hero .eyebrow,.hero .lede{color:rgba(255,247,237,.94)}
+.hero h1{color:#FFF7ED}
+@media (min-width:720px){.controls{grid-template-columns:repeat(6,minmax(0,1fr))} .ctl,.ctl-crav{grid-column:span 2}}
+
+.race{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px 12px; display:grid; gap:4px}
+.race h2{font-size:22px; font-weight:700}
+.racebar{position:relative; height:16px; border-radius:8px; margin:30px 8px 28px; background:linear-gradient(90deg,#FDE68A 0%,#FBBF24 28%,#F97316 48%,#BE185D 54%,#4C1D95 66%,#1E1B4B 100%)}
+.racebar .sm{position:absolute; top:-6px; bottom:-6px; width:3px; margin-left:-1.5px; background:var(--ink); border-radius:2px}
+.racebar .sm i{position:absolute; bottom:100%; left:50%; transform:translateX(-50%); font-style:normal; font-size:12px; font-weight:600; white-space:nowrap; padding-bottom:3px}
+.racebar .em{position:absolute; top:50%; width:26px; height:26px; margin:-13px 0 0 -13px; border-radius:50%; background:var(--yellow); border:3px solid var(--yellow-ink); box-shadow:0 2px 0 var(--yellow-ink); transition:left .4s}
+.racebar .em::after{content:attr(data-t); position:absolute; top:100%; left:50%; transform:translateX(-50%); margin-top:6px; font-size:12px; font-weight:600; white-space:nowrap}
+.race-scale{display:flex; justify-content:space-between; font-size:12px; color:var(--ink-soft); margin:-18px 8px 0}
+#raceMsg{font-weight:600}
+
+.mem{background:var(--raise); border:1px dashed var(--line); border-radius:10px}
+.mem summary{font-size:17px; padding:8px 12px; min-height:44px}
+.mem-b{padding:0 12px 12px; display:grid; gap:10px}
+.chipsel{display:flex; flex-wrap:wrap; gap:6px}
+.cb{min-height:40px; padding:0 12px; border-radius:999px; border:2px solid var(--line); background:var(--surface); font-weight:600; font-size:14px; cursor:pointer}
+.cb[aria-pressed="true"]{background:var(--yellow); color:var(--yellow-ink); border-color:var(--yellow-ink)}
+.mem textarea{width:100%; font:inherit; font-size:16px; padding:10px 12px; border-radius:10px; border:1px solid var(--line); background:var(--surface); color:var(--ink); resize:vertical; min-height:64px}
+
+.tabs{grid-template-columns:repeat(5,1fr)}
+.tabs button{min-height:44px; font-size:15px}
+.acts2{display:flex; flex-wrap:wrap; gap:8px}
+.legs{display:grid; gap:10px}
+.leg-card{background:var(--surface); border:2px solid var(--line); border-radius:12px; padding:12px 14px; display:grid; gap:4px}
+.leg-card.now{border-color:var(--sign)}
+.lc-h{display:flex; justify-content:space-between; align-items:center; gap:8px}
+.lc-h b{font-family:var(--font-display); font-size:22px; font-weight:800}
+.leg-card small{color:var(--ink-soft)}
+.songs{list-style:none; margin:4px 0 0; padding:0; display:grid}
+.songs li{display:flex; justify-content:space-between; gap:2px 10px; flex-wrap:wrap; padding:7px 0; border-top:1px dashed var(--line)}
+.songs a{font-weight:600}
+.songs span{color:var(--ink-soft); font-size:14px}
+
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px}
+.stat{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:10px 14px; display:grid; gap:2px}
+.stat span{font-family:var(--font-display); font-weight:700; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft)}
+.stat b{font-family:var(--font-display); font-weight:800; font-size:28px; line-height:1.05}
+.badges{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px}
+.badge{border:2px dashed var(--line); border-radius:12px; padding:10px 12px; display:grid; gap:2px; opacity:.6}
+.badge b{font-family:var(--font-display); font-size:19px; font-weight:800}
+.badge small{font-size:13px; color:var(--ink-soft)}
+.badge.on{opacity:1; border-style:solid; border-color:var(--sign); background:var(--surface)}
+.badge.on b::before{content:"\2605  "; color:var(--sign)}
+.memlist{list-style:none; margin:0; padding:0; display:grid; gap:8px}
+.memlist li{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:10px 14px; display:grid; gap:2px}
+.memlist b{font-family:var(--font-display); font-size:19px}
+.memlist span{font-size:13px; color:var(--ink-soft)}
+.memlist p{font-size:15px}
+
+.toast{position:fixed; left:50%; bottom:calc(104px + env(safe-area-inset-bottom,0px)); transform:translate(-50%,20px); background:var(--yellow); color:var(--yellow-ink); border:2px solid var(--yellow-ink); border-radius:999px; padding:10px 18px; font-weight:600; z-index:60; opacity:0; pointer-events:none; transition:opacity .2s,transform .2s; max-width:92vw; text-align:center}
+.toast.show{opacity:1; transform:translate(-50%,0)}
+@media (max-width:420px){.toast{bottom:calc(164px + env(safe-area-inset-bottom,0px))}}
+</style>
+</head>
+<body>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="stone" aria-hidden="true">
+      <div class="stone-top">Mysuru</div>
+      <div class="stone-body"><b>180</b><span>km</span></div>
+    </div>
+    <div>
+      <p class="eyebrow">Mahadevapura to Mysuru and back</p>
+      <h1>Mysuru Dash</h1>
+      <p class="lede">A same-day run down NH 275. Brunch at Amravathi, Chamundi Hill, lunch and the Palace, then home tonight.</p>
+    </div>
+  </header>
+
+  <nav class="jump" aria-label="Jump to a section">
+    <a href="#sec-stops">Stops</a><a href="#sec-fuel">Fuel</a><a href="#sec-route">Maps route</a><a href="#sec-games">Fun</a><a href="#sec-recap">Recap</a><a href="#sec-backups">Backups</a>
+  </nav>
+
+  <section class="controls" aria-label="Trip settings">
+    <div class="ctl">
+      <label for="dep">Leaving at</label>
+      <input type="time" id="dep" value="07:15">
+      <small>Every arrival time follows this.</small>
+    </div>
+    <div class="ctl">
+      <span class="lab" id="fastLab">Fast mode</span>
+      <button class="switch" id="fast" role="switch" aria-checked="false" aria-labelledby="fastLab fastTxt">
+        <span class="track"></span><b id="fastTxt">Skip extras</b>
+      </button>
+      <small>Skips the Maddur tea stop on the way back. Saves about 20 minutes.</small>
+    </div>
+    <div class="ctl ctl-crav">
+      <span class="lab" id="cravLab">Craving</span>
+      <div class="seg" role="group" aria-labelledby="cravLab">
+        <button data-mode="all" aria-pressed="false">All</button>
+        <button data-mode="nv" aria-pressed="true">Non-veg</button>
+        <button data-mode="veg" aria-pressed="false">Veg</button>
+      </div>
+      <small>Filters the food picks at each stop.</small>
+    </div>
+    <div class="ctl">
+      <span class="lab" id="fuelLab">Fuel stops</span>
+      <button class="switch" id="fuelSw" role="switch" aria-checked="true" aria-labelledby="fuelLab fuelTxt">
+        <span class="track"></span><b id="fuelTxt">Show pumps</b>
+      </button>
+      <small>Times are for driving past. Add about 10 minutes for a fill.</small>
+    </div>
+    <div class="ctl">
+      <span class="lab" id="trafLab">Bangalore traffic</span>
+      <button class="switch" id="trafSw" role="switch" aria-checked="true" aria-labelledby="trafLab trafTxt">
+        <span class="track"></span><b id="trafTxt">Add 30 min</b>
+      </button>
+      <small>For the evening crawl from Kengeri to Mahadevapura.</small>
+    </div>
+  </section>
+
+  <section class="pass" aria-label="Trip summary">
+    <div><span>Arrive</span><b id="sArrive">--</b></div>
+    <div><span>Round trip</span><b>~360 km</b></div>
+    <div><span>Driving</span><b id="sDrive">--</b></div>
+    <div><span>Breaks</span><b id="sBreaks">--</b></div>
+  </section>
+  <p class="sun" id="sunNote"></p>
+
+  <section class="race" aria-label="Race the sunset">
+    <h2>Race the sunset</h2>
+    <div class="racebar" id="racebar">
+      <span class="sm" id="sunMark"><i>Sunset 5:45 PM</i></span>
+      <span class="em" id="etaMark" data-t=""></span>
+    </div>
+    <div class="race-scale" aria-hidden="true"><span>2 PM</span><span>9 PM</span></div>
+    <p id="raceMsg"></p>
+  </section>
+
+  <section class="mission" aria-label="Trip progress">
+    <h2>Where are we?</h2>
+    <div class="roadbox">
+      <div class="road" id="road">
+        <div class="road-fill" id="roadFill"></div>
+        <div id="dots"></div>
+        <svg class="car" id="car" viewBox="0 0 30 18" aria-hidden="true">
+          <rect x="1" y="6" width="28" height="8" rx="3" fill="#F5C518" stroke="#1C1700" stroke-width="1.5"/>
+          <path d="M7 6 L10 1.5 H20 L24 6 Z" fill="#F5C518" stroke="#1C1700" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="8" cy="14.5" r="3" fill="#1C1700"/><circle cx="22" cy="14.5" r="3" fill="#1C1700"/>
+        </svg>
+      </div>
+    </div>
+    <p class="next" id="nextUp"></p>
+  </section>
+
+  <section id="sec-stops">
+    <div class="sec-h">
+      <h2>The stops</h2>
+      <p>Tap "We're here" at each stop, or in the bar at the bottom, and the car moves along the road. Not stopping somewhere? Tap Skip and every time below adjusts. Leave a note or a photo tag under Memories at each stop. Pumps appear between the stops, and the Fuel stops switch above hides them.</p>
+    </div>
+    <ol class="stops" id="stops" style="margin-top:14px"></ol>
+  </section>
+
+  <section class="panel" aria-label="Road conditions">
+    <h3>Road heads-up</h3>
+    <p>The expressway bypasses Bidadi, Ramanagara, Channapatna, Maddur, Mandya and Srirangapatna, so it is quick, but the first 38 km out of Mahadevapura to Kengeri are the slow part at 7 AM.</p>
+    <ul>
+      <li>Expect tolls both ways and keep the FASTag topped up. Speed limits on the expressway are enforced, so stay under the posted limit.</li>
+      <li>The drive back lands you in Bengaluru in the evening rush. The traffic buffer switch adds 30 minutes so the arrival time is honest.</li>
+      <li>The Race the sunset bar shows how much of the way home is in daylight. Sunset is around 5:45 PM at this time of year.</li>
+    </ul>
+    <p class="fine">Sources: <a href="https://www.outlooktraveller.com/destinations/india/all-you-need-to-know-for-your-bengaluru-to-mysuru-road-trip" target="_blank" rel="noopener">Outlook Traveller road trip guide</a> and the <a href="https://www.team-bhp.com/forum/route-travel-queries/248734-bangalore-mysore-expressway-thread-2.html" target="_blank" rel="noopener">Team-BHP expressway thread</a>. Forum reports can be old, so trust what you see on the road.</p>
+  </section>
+
+  <section id="sec-fuel">
+    <div class="sec-h">
+      <h2>Fuel and emergencies</h2>
+      <p>Pumps in the order you will pass them, out to Mysuru and back. Shell first, with IndianOil as backup. Highlighted ones are the best places to fill up.</p>
+    </div>
+    <div class="panel" style="margin-top:14px">
+      <h3>Will the tank do?</h3>
+      <div class="calc">
+        <label for="tank">Tank size (litres)<input type="number" id="tank" value="40" min="5" max="120" inputmode="numeric"></label>
+        <label for="kmpl">Real mileage (km/l)<input type="number" id="kmpl" value="14" min="3" max="40" inputmode="numeric"></label>
+        <p class="calc-out" id="calcOut"></p>
+      </div>
+    </div>
+    <ul class="pumps" id="pumps" style="margin-top:12px"></ul>
+    <div class="sos" style="margin-top:12px">
+      <div><b>112</b><span>Police, ambulance, fire</span></div>
+      <div><b>1033</b><span>National Highways helpline</span></div>
+    </div>
+    <details style="margin-top:12px">
+      <summary>About Shell on this road</summary>
+      <div class="body">
+        <div class="bk"><div class="bk-h"><b>Shell is thin on this corridor</b></div><p>I found Shell outlets at Kengeri (Mysore Road), Ramanagara (B.M. Road) and Hinkal on Hunsur Road in Mysuru. I found none confirmed at Channapatna, Maddur or Mandya, so IndianOil covers Mandya.</p></div>
+        <div class="bk"><div class="bk-h"><b>Check before you rely on a pin</b></div><p>Shell opening hours and amenities were not confirmed for the three Shell sites, and I only have addresses, not exact pins. Open each in Maps and check it is open.</p></div>
+        <div class="bk"><div class="bk-h"><b>One tank is enough</b></div><p>A tank filled at Kengeri covers most of the round trip. A top-up at Ramanagara or Mandya on the way back leaves a safe reserve.</p></div>
+      </div>
+  </section>
+
+  <section id="sec-route">
+    <div class="sec-h">
+      <h2>Take it to Google Maps</h2>
+      <p>Drive times between stops, following your start time and fast mode.</p>
+    </div>
+    <ol class="strip" id="strip"></ol>
+    <div class="panel" style="margin-top:14px">
+      <h3>Google Maps route</h3>
+      <span class="lab" id="rfLab">Fuel stops on the route</span>
+      <div class="seg" role="group" aria-labelledby="rfLab">
+        <button type="button" data-rf="none" aria-pressed="false">No fuel</button>
+        <button type="button" data-rf="key" aria-pressed="true">Fill-here</button>
+        <button type="button" data-rf="all" aria-pressed="false">All pumps</button>
+      </div>
+      <p class="fine" id="rfNote"></p>
+      <ul class="chips" id="routeStops" aria-label="Stops on this route"></ul>
+      <div class="rparts" id="routeBtns"></div>
+      <p class="fine">Times are estimates from typical highway speeds, so live traffic in Google Maps will differ. Ratings and restroom notes come from Google reviews and can change. Check each stop is open before you rely on it.</p>
+    </div>
+  </section>
+
+  <section id="sec-backups">
+    <div class="sec-h">
+      <h2>Backup stops</h2>
+      <p>If a stop is shut, full or not what you want, these are on the same road.</p>
+    </div>
+    <div id="backups" style="display:grid; gap:10px; margin-top:14px"></div>
+  </section>
+
+  <section class="games" id="sec-games">
+    <div class="sec-h">
+      <h2>Passenger seat</h2>
+      <p>Bingo, questions and dares, a playlist that follows the road, Kannada phrases and photo quests.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Passenger seat">
+      <button type="button" role="tab" data-tab="bingo" aria-selected="true">Bingo</button>
+      <button type="button" role="tab" data-tab="q" aria-selected="false">Ask</button>
+      <button type="button" role="tab" data-tab="songs" aria-selected="false">Songs</button>
+      <button type="button" role="tab" data-tab="ph" aria-selected="false">Words</button>
+      <button type="button" role="tab" data-tab="list" aria-selected="false">Photos</button>
+    </div>
+    <div class="tabpane" id="tab-bingo" role="tabpanel">
+      <p class="fine">Tap a square when you spot it. Three in a row wins.</p>
+      <div class="bingo" id="bingo"></div>
+      <p class="bingo-msg" id="bingoMsg" role="status"></p>
+    </div>
+    <div class="tabpane" id="tab-q" role="tabpanel" hidden>
+      <div class="board"><small id="qCount">Question and dare decks</small><p id="qText">Pick a deck below.</p></div>
+      <div class="acts2">
+        <button type="button" class="draw" id="draw">Draw a question</button>
+        <button type="button" class="draw" id="drawDare">Draw a dare</button>
+      </div>
+    </div>
+    <div class="tabpane" id="tab-songs" role="tabpanel" hidden>
+      <p class="fine" id="plNote">The playlist follows the road. The leg you are on is highlighted, and every song opens a YouTube search.</p>
+      <div class="legs" id="playlist"></div>
+      <div class="acts2"><button type="button" class="draw" id="surprise">Surprise me with a song</button></div>
+      <p id="surpriseOut" role="status"></p>
+    </div>
+    <div class="tabpane" id="tab-ph" role="tabpanel" hidden>
+      <p class="fine">Tap a phrase to see what it means and roughly how it sounds. The sounds are approximate.</p>
+      <div class="phs" id="phs"></div>
+    </div>
+    <div class="tabpane" id="tab-list" role="tabpanel" hidden>
+      <p class="fine" id="wishCount"></p>
+      <ul class="wish" id="wish"></ul>
+    </div>
+    <div class="ayt">
+      <button id="ayt">Are we there yet?</button>
+      <p class="reply" id="aytReply" role="status"></p>
+      <small id="aytCount"></small>
+    </div>
+  </section>
+
+  <section id="sec-recap">
+    <div class="sec-h">
+      <h2>Trip recap</h2>
+      <p>Fills in as you check in, tag memories and play. Badges unlock on the way.</p>
+    </div>
+    <div class="stats" id="stats" style="margin-top:14px"></div>
+    <h3 style="margin-top:18px; font-family:var(--font-display); font-size:24px; font-weight:800">Badges</h3>
+    <ul class="badges" id="badges" style="margin-top:10px"></ul>
+    <h3 style="margin-top:18px; font-family:var(--font-display); font-size:24px; font-weight:800">Memories</h3>
+    <ul class="memlist" id="memlist" style="margin-top:10px"></ul>
+    <div class="rpart" style="margin-top:14px">
+      <button type="button" class="btn primary" data-act="recapshare" id="shareBtn">Share the recap</button>
+      <button type="button" class="btn ghost" data-act="recapcopy">Copy text</button>
+    </div>
+  </section>
+
+  <section class="go">
+    <a class="btn ghost" href="../">More trips: open Pondy Run</a>
+    <button class="btn ghost" id="resetBtn" type="button">Start a fresh trip</button>
+  </section>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="dock" id="dock" role="region" aria-label="Next stop" hidden>
+  <div class="dock-in">
+    <a class="dock-t" id="dockGo" href="#sec-stops"><small>Next stop</small><b id="dockName"></b><span id="dockSub"></span></a>
+    <a class="dock-b" id="dockNav" href="#" target="_blank" rel="noopener">Navigate</a>
+    <button class="dock-b" id="dockSkip" type="button" data-act="skip" data-id="">Skip</button>
+    <button class="dock-b ok" id="dockHere" type="button" data-act="done" data-id="">We're here</button>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+var END_KM = 359, MYSURU_KM = 191, SUNSET = 17*60+45, ARRIVE_BY = 19*60, TRAFFIC = 30;
+var ORIGIN = "Sharadhi, Mahadevapura, Bengaluru";
+var DEST = "Sharadhi, Mahadevapura, Bengaluru";
+var KEY = "mysurudash.v1";
+
+var STOPS = [
+  {id:"start", kind:"start", label:"Start", name:"Sharadhi", where:"Mahadevapura, Bengaluru", km:0, drive:0, stay:0},
+  {id:"amr", kind:"brunch", label:"Brunch", name:"Amravathi", where:"NH 275, Ummadahalli, near Srinivasapura (Mandya district)", km:118, drive:140, stay:50,
+   pitch:"Your brunch stop, about two and a half hours out on NH 275 once the city section is done. I could not find reviews or a menu for this exact restaurant online, so open its Maps page for the menu, photos and hours before you commit.",
+   opts:[{n:"Amravathi Restaurant", d:"both", pick:"Brunch before Mysuru. I could not confirm the menu, so check it on Maps. Highway restaurants here usually serve both veg and non-veg.", url:"https://maps.app.goo.gl/TuF6wziTNxaBuchA8", q:"Amravathi Restaurant, NH 275, Ummadahalli, Karnataka 571404", lat:12.5458, lng:76.9321}],
+   facts:["Plus code GWWJ+8R5","IndianOil pump about 4 km ahead at Kallahalli","Reach it about 9:30 AM at the default start"],
+   heads:"Opening hours are not confirmed. If it is not open or serving yet, Bestin's Break and Maddur Tiffany's are on the same stretch."},
+  {id:"chamundi", kind:"sight", label:"Sightseeing", name:"Chamundi Hill", where:"Chamundi Hills, Mysuru", km:175, drive:75, stay:70,
+   pitch:"Go to the hill first, because most listings show the temple closing for an afternoon break. Sources disagree on the hours (7:30 AM to 2 PM and 3:30 to 6 PM, or 6:30 AM to 9 PM), so confirm before you climb. Plan on about two hours on a busy day. This plan gives you 70 minutes.",
+   place:{n:"Chamundi Hill temple", q:"Chamundeshwari Temple, Chamundi Hill, Mysuru", lat:12.2725, lng:76.6700},
+   facts:["Temple hours vary, check first","Big Nandi statue on the hill road","City views from the top"],
+   heads:"Weekend and festival queues can be long. If the temple line is huge, take the views and skip the darshan."},
+  {id:"rrr", kind:"lunch", label:"Lunch", name:"Mysuru lunch", where:"Central Mysuru", km:188, drive:30, stay:55,
+   pitch:"Lunch is the one stop where time slips. Pick by craving: Hotel RRR or Tegu Mess for non-veg, Mahesh Prasad for a clean veg meal.",
+   opts:[
+     {n:"Hotel RRR", d:"nv", pick:"Andhra-style biryani, chicken biryani and the Hanumanthu mutton pulao on a banana leaf. Expect a queue at lunch and plates from about Rs 250.", q:"Hotel RRR, Gandhi Square, Mysuru"},
+     {n:"Tegu Mess", d:"nv", pick:"Mutton chops and idlis made with homemade spices. It is always packed, so go early.", q:"Tegu Mess, Mysuru"},
+     {n:"Mahesh Prasad", d:"veg", pick:"Simple, clean, all-you-can-eat South Indian meals. Try the vangi bath or khara bath.", q:"Mahesh Prasad, Mysuru"}],
+   facts:["RRR queues build at lunch","Tegu Mess fills up, go early","Mahesh Prasad is open all day"],
+   heads:"If the line at RRR is long, swap to Tegu Mess or Mahesh Prasad rather than lose an hour."},
+  {id:"palace", kind:"sight", label:"Sightseeing", name:"Mysore Palace", where:"Sayyaji Rao Rd, Mysuru", km:MYSURU_KM, drive:10, stay:65,
+   pitch:"The big one. Most sources list 10 AM to 5:30 PM, with last entry around 5 PM. You take your shoes off at the door and leave the camera in your pocket, since photography is not allowed inside. Ticket prices differ between listings, so check the official site.",
+   place:{n:"Mysore Palace", q:"Mysore Palace, Sayyaji Rao Rd, Mysuru", lat:12.3052, lng:76.6552},
+   facts:["Open about 10 AM to 5:30 PM","Shoes off, no photos inside","Sound and light show is a separate ticket"],
+   heads:"This is the turnaround. Start the drive home by about 3:30 PM so most of the expressway is in daylight."},
+  {id:"maddur", kind:"rest", label:"Tea stop", name:"Maddur tea stop", where:"Maddur, on the Bangalore Mysore road", km:256, drive:80, stay:20, optional:true,
+   pitch:"The last proper break before Bengaluru. Maddur Tiffany's has ample parking and clean washrooms in its listings, and reviewers praise the food and the filter coffee. Bestin's Break is a food court nearby with spacious parking and decent restrooms.",
+   opts:[
+     {n:"Maddur Tiffany's", d:"veg", pick:"Filter coffee and a tiffin snack. Try the Maddur vada if it is on the menu.", q:"Maddur Tiffany's, Maddur, Karnataka"},
+     {n:"Bestin's Break", d:"both", pick:"A food court with parking and decent restrooms. A few counters may be closed.", q:"Bestin's Break, Maddur, Karnataka"}],
+   emptyNv:"No non-veg option is confirmed at Maddur Tiffany's. Bestin's Break is the one to try.",
+   facts:["Parking at both","Clean washrooms (reviews)","Last break before the city"],
+   heads:"Use the restroom here. After this it is expressway, then Kengeri and the city traffic."},
+  {id:"end", kind:"end", label:"Home", name:"Sharadhi", where:"Mahadevapura, Bengaluru", km:END_KM, drive:140, stay:0}
+];
+
+var PUMPS = [
+  {km:38, n:"Shell, near NICE Junction, Mysore Road, Kengeri", h:"", r:"", note:"The last Shell before the expressway. Fill here if the tank is under three quarters. Hours and amenities not confirmed.", q:"Shell petrol pump near NICE Junction, Mysore Road, Kengeri, Bengaluru", anchor:true},
+  {km:78, n:"Shell, B.M. Road, Ramanagara", h:"", r:"", note:"Listed on Shell's own station finder as a Gas Station on B.M. Road, Ramanagara. Hours and amenities not confirmed, so keep the Mandya IndianOil as the backup.", q:"Shell Gas Station, B.M. Road, Ramanagara, Karnataka 562159", anchor:true},
+  {km:121, n:"IndianOil, Kallahalli, Mandya (Bangalore Mysore Highway)", h:"", r:"", note:"Just past Amravathi. Its listing shows air, drinking water, washrooms and all payment modes. No Shell was confirmed around Mandya, so this is the backup.", q:"IndianOil petrol pump, Kallahalli, Bangalore Mysore Highway, Mandya", lat:12.528584, lng:76.904137},
+  {km:130, n:"IndianOil, Bevinahalli, Mandya (Mysore Bangalore road)", h:"", r:"4.0 stars on its listing", note:"On the road near Yeliyurkodi, a decent second option before Srirangapatna and Mysuru.", q:"IndianOil petrol pump, Bevinahalli, Yeliyurkodi, Mandya", lat:12.49808, lng:76.81561},
+  {km:174, n:"IndianOil, Sree Kamala Sales, Bangalore Ooty Road, Mysuru", h:"", r:"", note:"An easy city top-up near Chamundi Hill. I have no review details for it.", q:"IndianOil Sree Kamala Sales Services, Bangalore Ooty Road, Mysuru", lat:12.27844, lng:76.6592125},
+  {km:193, n:"Shell, Hunsur Road, Hinkal, Mysuru", h:"", r:"", note:"Described in a review as the first Shell outlet in Mysore. It is on the west side of the city, a detour of about 10 to 15 minutes, so only go if you want Shell fuel for the drive home.", q:"Shell petrol pump, Hunsur Road, Hinkal, Mysuru 570017"},
+  {km:221, n:"IndianOil, Bevinahalli, Mandya (on the way back)", h:"", r:"4.0 stars on its listing", note:"First pump after Srirangapatna on the drive home.", q:"IndianOil petrol pump, Bevinahalli, Yeliyurkodi, Mandya", lat:12.49808, lng:76.81561},
+  {km:236, n:"IndianOil, Kallahalli, Mandya (on the way back)", h:"", r:"", note:"Air, drinking water and washrooms on its listing. Top up here for a safe reserve into Bengaluru.", q:"IndianOil petrol pump, Kallahalli, Bangalore Mysore Highway, Mandya", lat:12.528584, lng:76.904137, anchor:true},
+  {km:281, n:"Shell, B.M. Road, Ramanagara (on the way back)", h:"", r:"", note:"Your Shell option on the drive home. Hours not confirmed.", q:"Shell Gas Station, B.M. Road, Ramanagara, Karnataka 562159", anchor:true},
+  {km:321, n:"Shell, near NICE Junction, Kengeri (on the way back)", h:"", r:"", note:"The last Shell before home, about 38 km from Mahadevapura. Hours not confirmed.", q:"Shell petrol pump near NICE Junction, Mysore Road, Kengeri, Bengaluru"}
+];
+
+var BACKUPS = [
+  {area:"More Mysuru lunch ideas", items:[
+    {n:"Vinayaka Mylari", d:"veg", note:"The famous dosa place on Nazarbad Main Road. Small, crowded, banana-leaf meals and no dedicated parking.", q:"Vinayaka Mylari, Nazarbad Main Road, Mysuru"},
+    {n:"Anima Madhva Bhavan", d:"veg", note:"A good option for vegetarians and even vegans.", q:"Anima Madhva Bhavan, Mysuru"},
+    {n:"Gufa", d:"nv", note:"Tasty non-veg food in a cave-like setting. Reviews are from 2010, so check recent ones.", q:"Gufa restaurant, Mysuru"},
+    {n:"Jewel Rock", d:"nv", note:"Another non-veg name from older guides. Check recent reviews.", q:"Jewel Rock restaurant, Mysuru"}]},
+  {area:"On the road", items:[
+    {n:"Kamat Lokaruchi", d:"veg", note:"Off Mysore Road on the Bengaluru side. I have no restroom details for it.", q:"Kamat Lokaruchi, Mysore Road, Karnataka"},
+    {n:"Bestin's Break, Maddur", d:"both", note:"Food court with spacious parking and a clean hand-wash area according to one review.", q:"Bestin's Break, Maddur, Karnataka"}]}
+];
+
+var BINGO = ["Toll plaza","Sugarcane lorry","Chamundi Hill in view","Coconut stall","Free square: first filter coffee","Mysore Palace dome","Cow or goat on the road","Expressway speed sign","Lorry with a painted slogan"];
+
+var LEGS = {
+  start:"Next leg: city crawl to Kengeri. One person on navigation.",
+  amr:"Next leg: the last stretch into Mysuru. Look for the hill.",
+  chamundi:"Next leg: lunch time. Decide veg or non-veg now.",
+  rrr:"Next leg: the Palace, shoes off at the door.",
+  palace:"Next leg: the drive home. Charge the phone, fill the water bottle.",
+  maddur:"Last leg: Kengeri, then the city. Deep breath."
+};
+var QUESTIONS = [
+  "What is the best meal you have had on a road trip?",
+  "Pick a song for this exact stretch of road.",
+  "If you were a king or queen of Mysuru for a day, what is your first order?",
+  "Which Mysuru thing would you take home if it fit in the boot?",
+  "Name three things you want to eat today.",
+  "What is one tiny thing that made your week better?",
+  "What was the funniest thing you saw from a car window?",
+  "Describe a perfect lazy Sunday in one sentence.",
+  "Where should we drive to next?",
+  "What would you put in the glovebox for the whole trip?",
+  "Rate the expressway out of ten. Why not a ten?",
+  "What smell takes you straight back to a childhood trip?",
+  "What are you proud of this month?",
+  "What is the one moment of today you would replay?"
+];
+var DARES = [
+  "Driver picks the next ten minutes of music. No skipping.",
+  "Describe Mysuru in exactly seven words.",
+  "Sing the chorus of the last song you heard, loudly.",
+  "Silent car for five minutes, then share your best thought.",
+  "Photo of the next milestone, held like a trophy.",
+  "Plan the next trip in sixty seconds.",
+  "Do your best tour guide voice for one kilometre.",
+  "Say thank you in three languages.",
+  "Guess the time of arrival, loser buys the coffee.",
+  "Tell a story about today that is mostly true."
+];
+var PHRASES = [
+  {lang:"Kannada", say:"Namaskara", mean:"Hello. Say it: nuh-muh-SKAA-ruh"},
+  {lang:"Kannada", say:"Hegiddira?", mean:"How are you? Say it: HEH-gid-dee-ruh"},
+  {lang:"Kannada", say:"Dhanyavadagalu", mean:"Thank you. Say it: DHUN-yuh-vaa-dhuh-gaa-loo"},
+  {lang:"Kannada", say:"Eshtu?", mean:"How much? Say it: ESH-too"},
+  {lang:"Kannada", say:"Swalpa kammi maadi", mean:"Please reduce it a little, for bargaining. Say it: SWUL-puh KUM-mee MAA-dee"},
+  {lang:"Kannada", say:"Chennagide", mean:"It is good. Say it: chen-NAA-gi-de"},
+  {lang:"Kannada", say:"Beda", mean:"I do not want it. Say it: BEH-dah"},
+  {lang:"Kannada", say:"Oota aaitha?", mean:"Have you eaten? Say it: OH-taa AAI-thaa"},
+  {lang:"Kannada", say:"Coffee kodi", mean:"Coffee please, said the Bengaluru way. Say it: coffee KOH-dee"},
+  {lang:"Kannada", say:"Swalpa adjust maadi", mean:"Please adjust a little, the classic. Say it: SWUL-puh uh-JUST MAA-dee"}
+];
+var WISH = [
+  "Selfie at the Palace gates, outside",
+  "The big Nandi on Chamundi Hill",
+  "The city view from the hill",
+  "Your banana-leaf lunch, before the first bite",
+  "A sugarcane lorry or juice stall",
+  "The best signboard you see",
+  "The car with the sunset behind it",
+  "A group photo at the last stop"
+];
+var PLAYLIST = [
+  {from:0, name:"Escape the city", where:"Mahadevapura to Kengeri, km 0 to 38", vibe:"Easy songs for the slow start.",
+   songs:[["Life Is a Highway","Tom Cochrane"],["Mungaru Maleye","Mungaru Male"],["Anisuthide","Mungaru Male"],["Belageddu","Kirik Party"]]},
+  {from:38, name:"Open road", where:"Kengeri to Amravathi, km 38 to 118", vibe:"Expressway speed, windows up, volume up.",
+   songs:[["Senorita","Zindagi Na Milegi Dobara"],["Dil Chahta Hai","Dil Chahta Hai"],["Zinda","Bhaag Milkha Bhaag"],["Sweet Child o' Mine","Guns N' Roses"]]},
+  {from:118, name:"Royal city", where:"Amravathi to Mysuru, km 118 to 191", vibe:"Palace-sized songs for the city of palaces.",
+   songs:[["Jashn-E-Bahaara","Jodhaa Akbar"],["Azeem-O-Shaan Shahenshah","Jodhaa Akbar"],["Ghoomar","Padmaavat"],["Take Me Home, Country Roads","John Denver"]]},
+  {from:191, name:"Homeward bound", where:"Mysuru to Mahadevapura, km 191 to 359", vibe:"Feel-good Hindi hits for the long way home.",
+   songs:[["Aal Izz Well","3 Idiots"],["Badtameez Dil","Yeh Jawaani Hai Deewani"],["Ilahi","Yeh Jawaani Hai Deewani"],["Home","Edward Sharpe & The Magnetic Zeros"]]}
+];
+
+var state = {dep:"07:15", fast:false, fuel:true, traffic:true, mode:"nv", rf:"key", skip:{}, done:{}, fuelled:{}, wish:{}, bingo:{4:true}, taps:0, mem:{}, badges:{}};
+var peek = {}, routeUrls = [];
+try{ var saved = JSON.parse(localStorage.getItem(KEY)||"null"); if(saved){ for(var k in saved){ state[k]=saved[k]; } } }catch(e){}
+state.bingo[4] = true;
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+
+function $(s){ return document.querySelector(s); }
+function toMin(v){ var p=(v||"07:15").split(":"); return (parseInt(p[0],10)||0)*60+(parseInt(p[1],10)||0); }
+function fmt(m){ m=Math.round(m); var h=Math.floor(m/60)%24, mm=m%60, ap=h>=12?"PM":"AM"; var h12=h%12; if(h12===0)h12=12; return h12+":"+(mm<10?"0":"")+mm+" "+ap; }
+function dur(m){ var h=Math.floor(m/60), mm=m%60; return h? (h+"h "+(mm<10?"0":"")+mm+"m") : (mm+"m"); }
+function mapsUrl(o){
+  if(o.url) return o.url;
+  return "https://www.google.com/maps/search/?api=1&query="+(o.pid ? o.lat+"%2C"+o.lng+"&query_place_id="+o.pid : encodeURIComponent(o.q));
+}
+function pumpMeta(p){ return [p.h, p.r].filter(Boolean).join(", ") || "Hours not confirmed"; }
+function destParam(o){ return o.pid ? encodeURIComponent(o.lat+","+o.lng)+"&destination_place_id="+encodeURIComponent(o.pid) : encodeURIComponent(o.lat ? o.lat+","+o.lng : o.q); }
+function esc(t){ return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function isSkipped(s){ return (state.fast && s.optional) || !!state.skip[s.id]; }
+function pickOpt(s){ return s.opts.filter(matches)[0] || s.opts[0]; }
+function nextStop(){
+  for(var i=1;i<STOPS.length;i++){ var s=STOPS[i]; if(!isSkipped(s) && !state.done[s.id]) return s; }
+  return null;
+}
+function scrollNext(){
+  var n = nextStop(), el = n && document.getElementById("s-"+n.id);
+  if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+function schedule(){
+  var t = toMin(state.dep), carry = 0, out = {}, driving = 0, stays = 0, breaks = 0;
+  STOPS.forEach(function(s){
+    if(s.id==="start"){ out[s.id]={arrive:t, leave:t}; return; }
+    var d = s.drive + (s.id==="end" && state.traffic ? TRAFFIC : 0);
+    driving += d;
+    if(isSkipped(s)){ carry += d; out[s.id]={skipped:true}; return; }
+    t += d + carry; carry = 0;
+    out[s.id] = {arrive:t, leave:t+s.stay};
+    if(s.id!=="end"){ t += s.stay; stays += s.stay; breaks++; }
+  });
+  return {byId:out, driving:driving, stays:stays, breaks:breaks, arrive:out.end.arrive};
+}
+
+function dietChip(d){
+  if(d==="veg") return '<span class="diet veg"><i></i>Veg</span>';
+  if(d==="nv") return '<span class="diet nv"><i></i>Non-veg</span>';
+  if(d==="both") return '<span class="diet both"><i></i><i></i>Veg and non-veg</span>';
+  return "";
+}
+function matches(o){ return state.mode==="all" || o.d==="both" || o.d===state.mode; }
+
+function pumpEta(p, sch){
+  var act = STOPS.filter(function(s){ return !isSkipped(s); });
+  var prev = act[0], next = act[act.length-1], i, j;
+  for(i=0;i<act.length;i++){ if(act[i].km<=p.km) prev = act[i]; }
+  for(j=act.length-1;j>=0;j--){ if(act[j].km>=p.km) next = act[j]; }
+  var a = sch.byId[prev.id], b = sch.byId[next.id];
+  if(prev.km===p.km) return {t:a.arrive, at:true};
+  var span = next.km-prev.km, frac = span>0 ? (p.km-prev.km)/span : 0;
+  return {t:a.leave+frac*(b.arrive-a.leave), at:false};
+}
+function pumpHtml(p, sch){
+  var e = pumpEta(p, sch), id = "p"+p.km, done = !!state.fuelled[id];
+  var h = '<li class="stop is-fuel'+(done?' is-done':'')+'" id="s-'+id+'"><div class="rail"><span class="km"><b>'+p.km+'</b><small>km</small></span></div><article class="card fuelcard">';
+  h += '<div class="top"><span class="kind k-fuel">'+(p.anchor?'Fuel, fill here':'Fuel')+'</span><span class="eta"><b>'+fmt(e.t)+'</b><small>'+(e.at?'at the stop':'driving past')+'</small></span></div>';
+  h += '<h3>'+p.n+'</h3><p class="note">'+p.note+'</p>';
+  h += '<div class="fuelrow"><span class="meta">'+pumpMeta(p)+'</span><a href="'+mapsUrl(p)+'" target="_blank" rel="noopener">Open in Maps</a><button class="here small" data-act="fuelled" data-id="'+id+'" aria-pressed="'+done+'">'+(done?'Filled up':'Filled up here')+'</button></div>';
+  return h+'</article></li>';
+}
+
+function renderStops(sch){
+  var html = "", nxt = nextStop();
+  var items = STOPS.map(function(s){ return {kind:"stop", km:s.km, ord:0, s:s}; });
+  if(state.fuel) PUMPS.forEach(function(p){ items.push({kind:"pump", km:p.km, ord:1, p:p}); });
+  items.sort(function(a,b){ return (a.km-b.km) || (a.ord-b.ord); });
+  items.forEach(function(it){
+    if(it.kind==="pump"){ html += pumpHtml(it.p, sch); return; }
+    var s = it.s;
+    var r = sch.byId[s.id], done = !!state.done[s.id], isNext = !!nxt && nxt.id===s.id;
+    if(r && r.skipped){
+      html += '<li class="stop is-skipped"><div class="rail"><span class="km"><b>'+s.km+'</b><small>km</small></span></div><div class="card"><p class="skipnote">Skipped'+(state.skip[s.id]?'':' in fast mode')+': '+s.name+'</p>'+(state.skip[s.id]?'<button type="button" class="peek" data-act="unskip" data-id="'+s.id+'">Add back</button>':'')+'</div></li>';
+      return;
+    }
+    var h = '<li class="stop'+(done?' is-done':'')+(isNext?' is-next':'')+'" id="s-'+s.id+'"><div class="rail"><span class="km"><b>'+s.km+'</b><small>km</small></span></div><article class="card">';
+    h += '<div class="top"><span><span class="kind k-'+s.kind+'">'+s.label+'</span>'+(isNext?'<span class="tag">Up next</span>':'')+'</span><span class="eta"><b>'+fmt(r.arrive)+'</b>';
+    if(s.stay) h += '<small>stay '+s.stay+' min</small>'; else if(s.id==="start") h += '<small>depart</small>'; else h += '<small>arrive</small>';
+    h += '</span></div><h3>'+s.name+'</h3><p class="where">'+s.where+'</p>';
+    var head = h; h = "";
+    if(s.pitch) h += '<p class="pitch">'+s.pitch+'</p>';
+    if(s.opts){
+      var shown = s.opts.filter(matches);
+      if(shown.length){
+        h += '<ul class="opts">';
+        shown.forEach(function(o){
+          h += '<li class="opt"><div class="opt-h"><b>'+o.n+'</b>'+dietChip(o.d)+'</div><p>'+o.pick+'</p><a href="'+mapsUrl(o)+'" target="_blank" rel="noopener">Open in Maps</a></li>';
+        });
+        h += '</ul>';
+      } else {
+        h += '<p class="empty">'+(s.emptyNv && state.mode==="nv" ? s.emptyNv : "No pick matches this filter here. Check the backup stops.")+'</p>';
+      }
+    }
+    if(s.place) h += '<p><a href="'+mapsUrl(s.place)+'" target="_blank" rel="noopener">Open in Maps</a></p>';
+    if(s.facts) h += '<ul class="facts">'+s.facts.map(function(f){return '<li>'+f+'</li>';}).join("")+'</ul>';
+    if(s.heads) h += '<p class="heads"><b>Heads up</b>'+s.heads+'</p>';
+    if(LEGS[s.id]) h += '<p class="leg">'+LEGS[s.id]+'</p>';
+    h = (done && !peek[s.id]) ? head+'<button type="button" class="peek" data-act="peek" data-id="'+s.id+'">Show details</button>' : head+h;
+    if(s.id!=="start") h += memHtml(s.id);
+    if(s.id!=="start") h += '<div class="acts"><button class="here" data-act="done" data-id="'+s.id+'" aria-pressed="'+done+'">'+(done?(s.id==="end"?"We made it":"Checked in"):(s.id==="end"?"We're here":"We're here"))+'</button>'+(s.id!=="end" && !done ? '<button type="button" class="skipbtn" data-act="skip" data-id="'+s.id+'">Skip this stop</button>' : '')+'</div>';
+    h += '</article></li>';
+    html += h;
+  });
+  $("#stops").innerHTML = html;
+}
+
+function pctT(m){ return Math.max(0, Math.min(100, (m-14*60)/(7*60)*100)); }
+function renderSummary(sch){
+  $("#sArrive").textContent = fmt(sch.arrive);
+  $("#sDrive").textContent = dur(sch.driving);
+  $("#sBreaks").textContent = sch.breaks+" for "+dur(sch.stays);
+  var late = sch.arrive - SUNSET;
+  $("#sunMark").style.left = pctT(SUNSET)+"%";
+  $("#etaMark").style.left = pctT(sch.arrive)+"%";
+  $("#etaMark").setAttribute("data-t", fmt(sch.arrive));
+  $("#raceMsg").textContent = late<=0 ? "You beat the sunset by "+dur(-late)+". Home in daylight." : "The sun wins by "+dur(late)+". The last stretch is after dark.";
+  var lm = null;
+  ["chamundi","rrr","palace"].forEach(function(id){ var r = sch.byId[id]; if(r && !r.skipped) lm = r.leave; });
+  var n = "";
+  if(lm !== null) n += "You leave Mysuru around <b>"+fmt(lm)+"</b>. ";
+  if(sch.arrive >= 16*60 && !state.traffic) n += "Evening traffic into Bengaluru can add 30 minutes or more, and the traffic buffer is off. ";
+  if(sch.arrive > ARRIVE_BY && lm !== null){ var latest = lm - (sch.arrive - ARRIVE_BY); n += "To be home by 7:00 PM, leave Mysuru by <b>"+fmt(latest)+"</b> or turn on fast mode."; }
+  $("#sunNote").innerHTML = n;
+}
+
+function progress(){
+  var km = 0, name = "the start", fk = null, fname = "";
+  STOPS.forEach(function(s){ if(state.done[s.id] && !isSkipped(s) && s.km>=km){ km = s.km; name = s.name; } });
+  PUMPS.forEach(function(p){
+    if(state.fuelled["p"+p.km]){
+      if(p.km>=km){ km = p.km; name = p.n; }
+      if(fk===null || p.km>fk){ fk = p.km; fname = p.n; }
+    }
+  });
+  return {km:km, name:name, fuelKm:fk, fuelName:fname};
+}
+
+function renderMission(sch){
+  var pr = progress(), maxKm = pr.km, lastName = pr.name;
+  var pct = Math.min(100, maxKm/END_KM*100);
+  $("#roadFill").style.width = pct+"%";
+  $("#car").style.left = pct+"%";
+  var dots = "";
+  STOPS.forEach(function(s){ if(s.id!=="start" && !isSkipped(s)){ dots += '<span class="dot'+(state.done[s.id]?' on':'')+'" style="left:'+(s.km/END_KM*100)+'%"></span>'; } });
+  if(state.fuel) PUMPS.forEach(function(p){ dots += '<span class="dot fuel'+(state.fuelled["p"+p.km]?' on':'')+'" style="left:'+(p.km/END_KM*100)+'%"></span>'; });
+  $("#dots").innerHTML = dots;
+  var next = nextStop(), dock = $("#dock");
+  dock.hidden = !next;
+  if(next){
+    var o = next.opts ? pickOpt(next) : next.place;
+    $("#dockName").textContent = next.name;
+    $("#dockSub").textContent = Math.max(0, next.km-maxKm)+" km, due "+fmt(sch.byId[next.id].arrive);
+    $("#dockGo").setAttribute("href", "#s-"+next.id);
+    $("#dockNav").setAttribute("href", "https://www.google.com/maps/dir/?api=1&travelmode=driving&destination="+(o ? destParam(o) : encodeURIComponent(DEST)));
+    $("#dockHere").setAttribute("data-id", next.id);
+    $("#dockSkip").setAttribute("data-id", next.id);
+    $("#dockSkip").hidden = next.id==="end";
+  }
+  var el = $("#nextUp");
+  if(!next){ el.innerHTML = '<b>You are home.</b><small>'+END_KM+' km done. Unpack, put the kettle on and scroll through your memories below.</small>'; return; }
+  var fl = pr.fuelKm===null ? "" : " Last fill-up: "+pr.fuelName+", "+Math.max(0, maxKm-pr.fuelKm)+" km ago.";
+  el.innerHTML = '<b>Next: '+next.name+'</b><small>About '+Math.max(0, next.km-maxKm)+' km ahead, due around '+fmt(sch.byId[next.id].arrive)+'. Last check-in: '+lastName+'.'+fl+'</small>';
+}
+
+function routePoints(){
+  var pts = [];
+  STOPS.forEach(function(s){
+    if(s.id==="start"||s.id==="end"||isSkipped(s)) return;
+    var o = s.opts ? pickOpt(s) : s.place;
+    pts.push({km:s.km, ord:0, n:o.n, lat:o.lat, lng:o.lng, pid:o.pid, q:o.q, fuel:false});
+  });
+  PUMPS.forEach(function(p){
+    if(state.rf==="all" || (state.rf==="key" && p.anchor)) pts.push({km:p.km, ord:1, n:p.n, lat:p.lat, lng:p.lng, pid:p.pid, q:p.q, fuel:true});
+  });
+  return pts.sort(function(a,b){ return (a.km-b.km) || (a.ord-b.ord); });
+}
+function locStr(p){ return typeof p==="string" ? p : (p.lat ? p.lat+","+p.lng : p.q); }
+function placeName(p){
+  if(typeof p==="string") return "Sharadhi";
+  var parts = p.n.replace(/\s*\(.*\)/, "").split(",");
+  return p.fuel ? parts[0]+" "+parts[parts.length-1].trim() : parts[0];
+}
+function routeParts(){
+  var seq = [ORIGIN].concat(routePoints(), [DEST]), parts = [], i = 0;
+  while(i<seq.length-1){
+    var j = Math.min(i+10, seq.length-1), seg = seq.slice(i, j+1), mids = seg.slice(1, -1), a = seg[0], b = seg[seg.length-1];
+    var u = "https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(locStr(a))+"&destination="+encodeURIComponent(locStr(b))+"&travelmode=driving";
+    if(typeof a!=="string" && a.pid) u += "&origin_place_id="+encodeURIComponent(a.pid);
+    if(typeof b!=="string" && b.pid) u += "&destination_place_id="+encodeURIComponent(b.pid);
+    if(mids.length){
+      u += "&waypoints="+encodeURIComponent(mids.map(locStr).join("|"));
+      if(mids.every(function(m){ return m.pid; })) u += "&waypoint_place_ids="+encodeURIComponent(mids.map(function(m){ return m.pid; }).join("|"));
+    }
+    parts.push({url:u, from:placeName(a), to:placeName(b)});
+    i = j;
+  }
+  return parts;
+}
+function renderRoute(){
+  var parts = routeParts(), pts = routePoints(), h = "";
+  routeUrls = parts.map(function(p){ return p.url; });
+  parts.forEach(function(p,i){
+    var label = parts.length===1 ? "Open the route in Google Maps" : "Part "+(i+1)+" of "+parts.length+": "+p.from+" to "+p.to;
+    h += '<div class="rpart"><a class="btn primary" href="'+p.url+'" target="_blank" rel="noopener">'+label+'</a><button type="button" class="btn ghost" data-copy="'+i+'">Copy link</button></div>';
+  });
+  $("#routeBtns").innerHTML = h;
+  $("#routeStops").innerHTML = pts.map(function(p){ return '<li'+(p.fuel?' class="fu"':'')+'>'+(p.fuel?'Fuel: ':'')+p.n+'</li>'; }).join("");
+  var note = state.rf==="none" ? "Only the food and rest stops are on the route." : state.rf==="key" ? "Adds the pumps marked Fill here." : "Adds every pump in the timeline.";
+  if(parts.length>1) note += " Google Maps takes at most 9 stops per link, so the route is split into "+parts.length+" parts. Open the next part when you finish the last one.";
+  $("#rfNote").textContent = note;
+  document.querySelectorAll("[data-rf]").forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-rf")===state.rf)); });
+}
+function renderStrip(sch){
+  var act = STOPS.filter(function(s){ return !isSkipped(s); }), h = "", prevLeave = 0;
+  act.forEach(function(s,i){
+    var r = sch.byId[s.id];
+    if(i) h += '<li class="hop">'+dur(r.arrive-prevLeave)+' drive</li>';
+    h += '<li class="n'+(i===0||i===act.length-1?' f':'')+'"><b>'+s.name+'</b><small>'+(i===0?'depart ':'')+fmt(r.arrive)+'</small></li>';
+    prevLeave = r.leave;
+  });
+  $("#strip").innerHTML = h;
+}
+
+function renderAll(){
+  var sch = schedule();
+  renderStops(sch); renderSummary(sch); renderMission(sch);
+  renderRoute(); renderStrip(sch); renderPlaylist(); renderRecap(); checkBadges();
+  $("#dep").value = state.dep;
+  $("#fast").setAttribute("aria-checked", String(state.fast));
+  $("#fuelSw").setAttribute("aria-checked", String(state.fuel));
+  $("#trafSw").setAttribute("aria-checked", String(state.traffic));
+  document.querySelectorAll(".seg button[data-mode]").forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-mode")===state.mode)); });
+}
+
+function renderPumps(){
+  var h = "";
+  PUMPS.forEach(function(p){
+    h += '<li class="pump'+(p.anchor?' anchor':'')+'"><span class="km"><b>'+p.km+'</b><small>km</small></span><div><h4>'+p.n+(p.anchor?'<span class="tag">Fill here</span>':'')+'</h4><div class="meta"><span><b>'+pumpMeta(p)+'</b></span><a href="'+mapsUrl(p)+'" target="_blank" rel="noopener">Open in Maps</a></div><p>'+p.note+'</p></div></li>';
+  });
+  $("#pumps").innerHTML = h;
+}
+function renderCalc(){
+  var tank = parseFloat($("#tank").value)||0, kmpl = parseFloat($("#kmpl").value)||0;
+  var full = tank*kmpl, safe = full*0.8, maxGap = 0, from = "", to = "";
+  var list = [{km:0,n:"Bengaluru"}].concat(PUMPS).map(function(p){return {km:p.km,n:p.n};}).concat([{km:END_KM,n:"Bengaluru"}]);
+  for(var i=1;i<list.length;i++){ var g=list[i].km-list[i-1].km; if(g>maxGap){ maxGap=g; from=list[i-1].n; to=list[i].n; } }
+  var msg = "A full tank is about <b>"+Math.round(full)+" km</b>. Keeping a 20% reserve leaves about <b>"+Math.round(safe)+" km</b>. ";
+  msg += "The longest gap between listed pumps is <b>"+maxGap+" km</b>, from "+from.split(",")[0]+" to "+to.split(",")[0]+". ";
+  if(safe>=END_KM) msg += "One full tank from Bengaluru covers the whole round trip. Top up at Ramanagara or Mandya on the way back anyway.";
+  else if(safe>=maxGap*2) msg += "Fill up at Kengeri on the way out and Mandya on the way back and you have a wide margin.";
+  else if(safe>=maxGap) msg += "Fill at every highlighted pump, because the margin is thin.";
+  else msg += "That is shorter than the longest gap, so plan a fill before it.";
+  $("#calcOut").innerHTML = msg;
+}
+
+function renderBackups(){
+  var h = "";
+  BACKUPS.forEach(function(g){
+    h += '<details'+(g.skip?'':'')+'><summary>'+g.area+'</summary><div class="body">';
+    g.items.forEach(function(o){
+      h += '<div class="bk"><div class="bk-h"><b'+(g.skip?' class="skip"':'')+'>'+o.n+'</b>'+dietChip(o.d)+'</div><p>'+o.note+'</p><a href="'+mapsUrl(o)+'" target="_blank" rel="noopener">Open in Maps</a></div>';
+    });
+    h += '</div></details>';
+  });
+  $("#backups").innerHTML = h;
+}
+
+var LINES = [
+  [150, ["Not yet. {r} km to {d}, so pick the next song.","Still {r} km to {d}. Check the snack bag.","{r} km to {d}. The road is long and the playlist is longer."]],
+  [100, ["Closer, but {r} km to {d} remain. Hydrate.","{r} km to go to {d}. Someone owes someone a filter coffee.","Still {r} km. Count the sugarcane lorries."]],
+  [60, ["{r} km to {d}. Getting there.","Almost. {r} km to {d}, and the end is in sight.","{r} km left. Start deciding what to eat."]],
+  [20, ["{r} km to {d}. Start looking for the signs.","Nearly. {r} km, stay seated.","{r} km. Find the next turn on the map."]],
+  [0, ["Yes. Look up.","We are basically there. Unbuckle in a minute.","Yes. Bags out."]]
+];
+function lastKm(){ return progress().km; }
+function askAYT(){
+  state.taps++; var tgt = lastKm() < MYSURU_KM ? MYSURU_KM : END_KM, r = tgt - lastKm(), i = 0;
+  for(i=0;i<LINES.length;i++){ if(r>LINES[i][0]) break; }
+  if(i>=LINES.length) i=LINES.length-1;
+  var arr = LINES[i][1], line = arr[(state.taps-1)%arr.length].replace("{r}", r).replace("{d}", tgt===END_KM ? "home" : "Mysuru");
+  if(r<=0) line = LINES[4][1][(state.taps-1)%3];
+  $("#aytReply").textContent = line;
+  $("#aytCount").textContent = "Asked "+state.taps+(state.taps===1?" time":" times")+" so far.";
+  save(); renderRecap(); checkBadges();
+}
+
+var WINS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+function renderBingo(){
+  var h = "";
+  BINGO.forEach(function(t,i){ h += '<button type="button" data-act="bingo" data-i="'+i+'" class="'+(i===4?'free':'')+'" aria-pressed="'+!!state.bingo[i]+'">'+t+'</button>'; });
+  $("#bingo").innerHTML = h;
+  var lines = WINS.filter(function(w){ return w.every(function(i){ return state.bingo[i]; }); }).length;
+  var left = BINGO.filter(function(t,i){ return !state.bingo[i]; }).length;
+  $("#bingoMsg").textContent = lines ? (lines>1 ? "Bingo, "+lines+" lines. Winner picks the next stop's snacks." : "Bingo. Winner picks the next stop's snacks.") : (left===8 ? "" : left+" squares still to spot.");
+}
+
+var decks = {};
+function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
+function drawFrom(name, list, label){
+  var d = decks[name] || (decks[name] = {order:[], pos:0});
+  if(d.pos>=d.order.length){ d.order = shuffle(list.map(function(q,i){ return i; })); d.pos = 0; }
+  var i = d.order[d.pos++];
+  $("#qText").textContent = list[i];
+  $("#qCount").textContent = label+" "+d.pos+" of "+list.length;
+}
+function showTab(id){
+  document.querySelectorAll(".tabs button").forEach(function(b){ b.setAttribute("aria-selected", String(b.getAttribute("data-tab")===id)); });
+  document.querySelectorAll(".tabpane").forEach(function(p){ p.hidden = (p.id !== "tab-"+id); });
+}
+function renderPhrases(){
+  $("#phs").innerHTML = PHRASES.map(function(p){
+    return '<button type="button" class="ph" data-act="flip"><span class="lang">'+p.lang+'</span><span class="say">'+p.say+'</span><span class="mean">'+p.mean+'</span></button>';
+  }).join("");
+}
+function ytUrl(song){ return "https://www.youtube.com/results?search_query="+encodeURIComponent(song[0]+" "+song[1]); }
+function curLeg(km){ for(var i=PLAYLIST.length-1;i>=0;i--){ if(km>=PLAYLIST[i].from) return i; } return 0; }
+function renderPlaylist(){
+  var cur = curLeg(progress().km);
+  $("#playlist").innerHTML = PLAYLIST.map(function(L,i){
+    return '<article class="leg-card'+(i===cur?' now':'')+'"><div class="lc-h"><b>'+L.name+'</b>'+(i===cur?'<span class="tag">Now</span>':'')+'</div><small>'+L.where+'</small><p>'+L.vibe+'</p><ul class="songs">'+L.songs.map(function(s){ return '<li><a href="'+ytUrl(s)+'" target="_blank" rel="noopener">'+s[0]+'</a><span>'+s[1]+'</span></li>'; }).join("")+'</ul></article>';
+  }).join("");
+}
+function surprise(){
+  var all = []; PLAYLIST.forEach(function(L){ all = all.concat(L.songs); });
+  var s = all[Math.floor(Math.random()*all.length)];
+  $("#surpriseOut").innerHTML = 'Play <a href="'+ytUrl(s)+'" target="_blank" rel="noopener"><b>'+s[0]+'</b></a> by '+s[1]+'.';
+}
+
+var MEM_TAGS = ["Delicious","Pretty view","Funny moment","Tired","Photo taken"];
+function memOf(id){ return state.mem[id] || (state.mem[id] = {tags:{}, note:""}); }
+function memCount(id){ var m = state.mem[id]; if(!m) return 0; return Object.keys(m.tags).filter(function(k){ return m.tags[k]; }).length + (m.note ? 1 : 0); }
+function memHtml(id){
+  var m = state.mem[id] || {tags:{}, note:""}, n = memCount(id);
+  var h = '<details class="mem"><summary>Memories'+(n?' ('+n+')':'')+'</summary><div class="mem-b"><div class="chipsel">';
+  MEM_TAGS.forEach(function(t){ h += '<button type="button" class="cb" data-act="memtag" data-id="'+id+'" data-tag="'+t+'" aria-pressed="'+!!m.tags[t]+'">'+t+'</button>'; });
+  return h+'</div><textarea data-mem="'+id+'" rows="2" maxlength="240" placeholder="One line to remember this stop by" aria-label="Note for this stop">'+esc(m.note)+'</textarea></div></details>';
+}
+
+var BADGES = [
+  {id:"brk", n:"Brunch Club", d:"Check in at Amravathi.", test:function(){ return !!state.done.amr; }},
+  {id:"hill", n:"Hill Climber", d:"Check in at Chamundi Hill.", test:function(){ return !!state.done.chamundi; }},
+  {id:"royal", n:"Royal Visit", d:"Check in at the Palace.", test:function(){ return !!state.done.palace; }},
+  {id:"pump", n:"Pump Pro", d:"Log a fill-up.", test:function(){ return Object.keys(state.fuelled).some(function(k){ return state.fuelled[k]; }); }},
+  {id:"bingo", n:"Eagle Eyes", d:"Get a bingo line.", test:function(){ return WINS.some(function(w){ return w.every(function(i){ return state.bingo[i]; }); }); }},
+  {id:"stops", n:"Stop Collector", d:"Check in at 4 stops.", test:function(){ return STOPS.filter(function(s){ return s.id!=="start" && state.done[s.id]; }).length >= 4; }},
+  {id:"photo", n:"Shutterbug", d:"Tag 3 photos.", test:function(){ return Object.keys(state.mem).filter(function(k){ return state.mem[k].tags["Photo taken"]; }).length >= 3; }},
+  {id:"story", n:"Storyteller", d:"Write 2 stop notes.", test:function(){ return Object.keys(state.mem).filter(function(k){ return state.mem[k].note; }).length >= 2; }},
+  {id:"ayt", n:"Backseat Boss", d:"Ask Are we there yet 5 times.", test:function(){ return state.taps >= 5; }},
+  {id:"quest", n:"Quest Master", d:"Finish 4 photo quests.", test:function(){ return Object.keys(state.wish).filter(function(k){ return state.wish[k]; }).length >= 4; }},
+  {id:"home", n:"Home Safe", d:"Make it back to Bengaluru.", test:function(){ return !!state.done.end; }}
+];
+var toastT;
+function toast(msg){ var el = $("#toast"); el.textContent = msg; el.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(function(){ el.classList.remove("show"); }, 3200); }
+function checkBadges(){
+  var won = [];
+  BADGES.forEach(function(b){ if(!state.badges[b.id] && b.test()){ state.badges[b.id] = true; won.push(b.n); } });
+  if(won.length){ save(); renderRecap(); toast("Badge unlocked: "+won.join(", ")); }
+}
+
+function recapData(){
+  var act = STOPS.filter(function(s){ return s.id!=="start" && !isSkipped(s); });
+  var visited = act.filter(function(s){ return state.done[s.id]; }).length;
+  var skipped = STOPS.filter(function(s){ return s.id!=="start" && state.skip[s.id]; }).length;
+  var fills = Object.keys(state.fuelled).filter(function(k){ return state.fuelled[k]; }).length;
+  var photos = Object.keys(state.mem).filter(function(k){ return state.mem[k].tags["Photo taken"]; }).length;
+  var lines = WINS.filter(function(w){ return w.every(function(i){ return state.bingo[i]; }); }).length;
+  var mems = STOPS.filter(function(s){ return memCount(s.id); });
+  return {visited:visited, total:act.length, skipped:skipped, km:progress().km, fills:fills, photos:photos, lines:lines, mems:mems};
+}
+function renderRecap(){
+  var r = recapData();
+  var tiles = [["Stops visited", r.visited+" of "+r.total],["Skipped", r.skipped],["Distance", r.km+" km"],["Fill-ups", r.fills],["Photos tagged", r.photos],["Bingo lines", r.lines],["Asked are we there yet", state.taps]];
+  $("#stats").innerHTML = tiles.map(function(t){ return '<div class="stat"><span>'+t[0]+'</span><b>'+t[1]+'</b></div>'; }).join("");
+  $("#badges").innerHTML = BADGES.map(function(b){ return '<li class="badge'+(state.badges[b.id]?' on':'')+'"><b>'+b.n+'</b><small>'+b.d+'</small></li>'; }).join("");
+  $("#memlist").innerHTML = r.mems.length ? r.mems.map(function(s){
+    var m = state.mem[s.id], tg = MEM_TAGS.filter(function(t){ return m.tags[t]; }).join(", ");
+    return '<li><b>'+s.name+'</b>'+(tg?'<span>'+tg+'</span>':'')+(m.note?'<p>'+esc(m.note)+'</p>':'')+'</li>';
+  }).join("") : '<li><span>Nothing yet. Open Memories on any stop to add a tag or a note.</span></li>';
+}
+function recapText(){
+  var r = recapData(), t = "Mysuru Dash: Bengaluru to Mysuru and back\n"+r.visited+" of "+r.total+" stops, "+r.km+" km, "+r.fills+" fill-ups, "+r.photos+" photos tagged.\n";
+  var won = BADGES.filter(function(b){ return state.badges[b.id]; }).map(function(b){ return b.n; });
+  if(won.length) t += "Badges: "+won.join(", ")+"\n";
+  r.mems.forEach(function(s){ var m = state.mem[s.id], tg = MEM_TAGS.filter(function(x){ return m.tags[x]; }).join(", "); t += "\n"+s.name+(tg?" ("+tg+")":"")+(m.note?": "+m.note:""); });
+  return t;
+}
+function copyText(text, btn){
+  var label = btn.textContent;
+  var ok = function(){ btn.textContent = "Copied"; setTimeout(function(){ btn.textContent = label; }, 2000); };
+  var fallback = function(){
+    var ta = document.createElement("textarea"); ta.value = text; ta.setAttribute("readonly",""); ta.style.cssText = "position:fixed;opacity:0;font-size:16px";
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy") ? ok() : window.prompt("Copy this", text); }catch(err){ window.prompt("Copy this", text); }
+    document.body.removeChild(ta);
+  };
+  try{ navigator.clipboard.writeText(text).then(ok, fallback); }catch(err){ fallback(); }
+}
+
+function renderWish(){
+  $("#wish").innerHTML = WISH.map(function(w,i){
+    return '<li><button type="button" data-act="wish" data-i="'+i+'" aria-pressed="'+!!state.wish[i]+'"><span class="box"></span><span class="t">'+w+'</span></button></li>';
+  }).join("");
+  var n = WISH.filter(function(w,i){ return state.wish[i]; }).length;
+  $("#wishCount").textContent = n+" of "+WISH.length+" quests done. Tap one when you have the shot.";
+}
+function burst(){
+  try{ if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return; }catch(e){}
+  var box = document.createElement("div"); box.className = "confetti"; box.setAttribute("aria-hidden","true");
+  var cols = ["var(--yellow)","var(--sign)","var(--stone)","var(--nonveg)"];
+  for(var i=0;i<46;i++){
+    var c = document.createElement("i");
+    c.style.left = (Math.random()*100)+"%";
+    c.style.background = cols[i%cols.length];
+    c.style.animationDuration = (1.8+Math.random()*1.6)+"s";
+    c.style.animationDelay = (Math.random()*0.5)+"s";
+    box.appendChild(c);
+  }
+  document.body.appendChild(box);
+  setTimeout(function(){ if(box.parentNode) box.parentNode.removeChild(box); }, 4200);
+}
+
+document.addEventListener("click", function(e){
+  var t = e.target.closest("[data-act],[data-mode],[data-tab],[data-rf],[data-copy],#fast,#fuelSw,#trafSw,#draw,#drawDare,#surprise,#resetBtn,#ayt");
+  if(!t) return;
+  if(t.id==="fast"){ state.fast = !state.fast; save(); renderAll(); return; }
+  if(t.id==="fuelSw"){ state.fuel = !state.fuel; save(); renderAll(); return; }
+  if(t.id==="trafSw"){ state.traffic = !state.traffic; save(); renderAll(); return; }
+  if(t.id==="draw"){ drawFrom("q", QUESTIONS, "Question"); return; }
+  if(t.id==="drawDare"){ drawFrom("d", DARES, "Dare"); return; }
+  if(t.id==="surprise"){ surprise(); return; }
+  if(t.hasAttribute("data-tab")){ showTab(t.getAttribute("data-tab")); return; }
+  if(t.hasAttribute("data-mode")){ state.mode = t.getAttribute("data-mode"); save(); renderAll(); return; }
+  if(t.id==="ayt"){ askAYT(); return; }
+  if(t.hasAttribute("data-rf")){ state.rf = t.getAttribute("data-rf"); save(); renderAll(); return; }
+  if(t.id==="resetBtn"){
+    if(confirm("Clear every check-in, memory and badge and start a fresh trip?")){ state.done = {}; state.fuelled = {}; state.skip = {}; state.mem = {}; state.badges = {}; state.wish = {}; state.bingo = {4:true}; state.taps = 0; peek = {}; save(); renderAll(); renderBingo(); renderWish(); $("#aytReply").textContent = ""; $("#aytCount").textContent = ""; window.scrollTo(0,0); }
+    return;
+  }
+  if(t.hasAttribute("data-copy")){
+    copyText(routeUrls[parseInt(t.getAttribute("data-copy"),10)], t);
+    return;
+  }
+  var act = t.getAttribute("data-act");
+  if(act==="done"){ var id=t.getAttribute("data-id"); state.done[id] = !state.done[id]; save(); renderAll(); if((id==="end" || id==="palace") && state.done[id]) burst(); else if(state.done[id]) scrollNext(); }
+  if(act==="skip"){ var sk=t.getAttribute("data-id"); state.skip[sk] = true; delete state.done[sk]; save(); renderAll(); scrollNext(); }
+  if(act==="unskip"){ delete state.skip[t.getAttribute("data-id")]; save(); renderAll(); }
+  if(act==="memtag"){
+    var mi = t.getAttribute("data-id"), mt = t.getAttribute("data-tag"), m = memOf(mi);
+    m.tags[mt] = !m.tags[mt]; t.setAttribute("aria-pressed", String(!!m.tags[mt])); save(); renderRecap(); checkBadges();
+  }
+  if(act==="recapcopy"){ copyText(recapText(), t); }
+  if(act==="recapshare"){
+    if(navigator.share){ navigator.share({title:"Mysuru Dash", text:recapText()}).catch(function(){}); } else { copyText(recapText(), t); }
+  }
+  if(act==="peek"){ peek[t.getAttribute("data-id")] = true; renderAll(); }
+  if(act==="fuelled"){ var fid=t.getAttribute("data-id"); state.fuelled[fid] = !state.fuelled[fid]; save(); renderAll(); }
+  if(act==="flip"){ t.classList.toggle("flipped"); }
+  if(act==="wish"){ var wi=parseInt(t.getAttribute("data-i"),10); state.wish[wi] = !state.wish[wi]; save(); renderWish(); checkBadges(); }
+  if(act==="bingo"){ var i=parseInt(t.getAttribute("data-i"),10); if(i!==4){ state.bingo[i] = !state.bingo[i]; save(); renderBingo(); checkBadges(); } }
+});
+document.addEventListener("input", function(e){
+  var ta = e.target;
+  if(ta.matches && ta.matches("textarea[data-mem]")){ memOf(ta.getAttribute("data-mem")).note = ta.value; save(); renderRecap(); checkBadges(); }
+});
+$("#dep").addEventListener("change", function(e){ state.dep = e.target.value || "07:15"; save(); renderAll(); });
+$("#tank").addEventListener("input", renderCalc);
+$("#kmpl").addEventListener("input", renderCalc);
+
+renderAll(); renderPumps(); renderCalc(); renderBackups(); renderBingo(); renderPhrases(); renderWish();
+if(state.taps){ $("#aytCount").textContent = "Asked "+state.taps+(state.taps===1?" time":" times")+" so far."; }
+})();
+</script>
+
+
+</body></html>
